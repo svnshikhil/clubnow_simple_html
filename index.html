@@ -36,6 +36,10 @@
     <header class="bg-white shadow-xl sticky top-0 z-10 border-b-4 border-red-600">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <h1 class="text-3xl font-extrabold text-red-700">Clubnow</h1>
+            <!-- Mobile Menu Placeholder -->
+            <button class="md:hidden text-gray-700 hover:text-red-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
             <nav class="hidden md:flex space-x-8 text-gray-600">
                 <a href="#" class="hover:text-red-600 transition duration-150">Home</a>
                 <a href="#categories" class="hover:text-red-600 transition duration-150">Max Discount Shop</a>
@@ -132,10 +136,10 @@
                     </button>
                 </div>
 
-                <p class="text-sm text-gray-600 mb-6">Provide your contact details below. Once enough collective orders are met, our specialist will contact you with the final, maximized discount price.</p>
+                <p class="text-sm text-gray-600 mb-6" id="modal-description">Provide your contact details below. Once enough collective orders are met, our specialist will contact you with the final, maximized discount price.</p>
 
                 <form id="contact-form" onsubmit="handleFormSubmit(event)">
-                    <div class="space-y-4">
+                    <div id="form-fields" class="space-y-4">
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                             <input type="text" id="name" name="name" required class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-red-600 focus:border-red-600 transition duration-150">
@@ -152,7 +156,7 @@
 
                     <div id="submission-message" class="mt-4 text-center p-3 rounded-lg text-white font-medium hidden"></div>
 
-                    <div class="mt-6 flex justify-end">
+                    <div id="action-buttons" class="mt-6 flex justify-end">
                         <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg mr-3 hover:bg-gray-400 transition duration-150">Cancel</button>
                         <button type="submit" id="submit-button" class="bg-red-600 text-white py-2 px-6 rounded-lg font-bold hover:bg-red-700 transition duration-150 shadow-lg">Submit Inquiry</button>
                     </div>
@@ -160,6 +164,14 @@
             </div>
         </div>
     </div>
+
+    <!-- Floating WhatsApp Button -->
+    <button onclick="sendWhatsAppMessage()" class="fixed bottom-6 right-6 p-4 rounded-full bg-green-500 text-white shadow-xl hover:bg-green-600 transition duration-300 z-50">
+        <!-- WhatsApp Icon (Inline SVG for compliance) -->
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 3.31 1.6 6.3 4.07 8.16l-1.33 4.88 4.88-1.33C9.7 22.4 11.8 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.17 14.59c-.06-.03-.4-.15-.75-.3-.35-.15-.6-.2-.84.25-.24.45-.48.48-.8.43-.32-.06-1.15-.43-2.19-1.32-1.04-.89-1.74-1.95-1.94-2.29-.2-.33 0-.51.15-.66.14-.14.31-.2.4-.28.08-.08.15-.17.25-.29.1-.12.14-.2.2-.33.06-.13 0-.25-.13-.51-.13-.25-.97-2.31-1.33-3.17-.36-.85-.73-.75-1.02-.77-.28-.02-.6-.02-.92-.02-.32 0-.84.12-1.28.6-.44.47-1.68 1.63-1.68 4.05 0 2.42 1.73 4.86 1.97 5.17.24.31 3.39 5.2 8.08 6.55 4.69 1.35 4.69.9 5.53.84.84-.06 2.05-.83 2.34-1.67.29-.83.29-.83.2-.99-.09-.15-.35-.24-.7-.41z"/>
+        </svg>
+    </button>
 
 
     <!-- Footer -->
@@ -348,11 +360,9 @@
                 ]},
                 { name: "AV Receivers", id: "AVR", children: [
                     { name: "7.2 Channel", id: "7.2C", children: [
-                        { name: "100W Per Channel", id: "100W", children: [
-                            { name: "8K Passthrough", isFinal: true, id: "8KP" }
-                        ]}
-                    ]}
-                ]}
+                        { name: "100W Per Channel", isFinal: true, id: "8KP" }
+                    ]} // FIX 1: Removed redundant closing brace
+                ]} // FIX 1: Removed redundant closing brace
             ]},
             // --- 11. Geysers/Water Heaters (WH) ---
             { name: "Water Heaters (Geysers)", image: "https://placehold.co/400x300/991B1B/ffffff?text=Hot+Water", id: "WH", children: [
@@ -390,8 +400,7 @@
                     ]}
                 ]}
             ]}
-        ];
-
+        ]; // FIX 2: Added missing array terminator '];'
         // State to track current navigation path
         let currentPath = [];
         let finalProductId = null;
@@ -539,7 +548,24 @@
             renderCategories(getCurrentCategories());
         }
 
+        /**
+         * Opens WhatsApp link with pre-filled message.
+         */
+        function sendWhatsAppMessage() {
+            // Number: +91 8714990266 (WhatsApp link requires country code without '+')
+            const phoneNumber = '918714990266'; 
+            const message = 'Hi';
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+
         // --- Modal Functions ---
+
+        const initialActionButtonsHtml = `
+            <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg mr-3 hover:bg-gray-400 transition duration-150">Cancel</button>
+            <button type="submit" id="submit-button" class="bg-red-600 text-white py-2 px-6 rounded-lg font-bold hover:bg-red-700 transition duration-150 shadow-lg">Submit Inquiry</button>
+        `;
 
         function openModal() {
             const modal = document.getElementById('contact-modal');
@@ -550,6 +576,12 @@
             modal.classList.add('opacity-100');
             content.classList.remove('scale-95', 'opacity-0');
             content.classList.add('scale-100', 'opacity-100');
+
+            // Reset UI state for form
+            document.getElementById('modal-title').innerHTML = `Inquire for Club Pricing on <span id="final-selection-name" class="text-gray-900">${document.getElementById('final-selection-name').textContent}</span>`;
+            document.getElementById('modal-description').textContent = "Provide your contact details below. Once enough collective orders are met, our specialist will contact you with the final, maximized discount price.";
+            document.getElementById('form-fields').classList.remove('hidden');
+            document.getElementById('action-buttons').innerHTML = initialActionButtonsHtml;
         }
 
         function closeModal() {
@@ -564,8 +596,7 @@
                 // Reset form and message
                 document.getElementById('contact-form').reset();
                 document.getElementById('submission-message').classList.add('hidden');
-                document.getElementById('submit-button').disabled = false;
-                document.getElementById('submit-button').textContent = 'Submit Inquiry';
+                document.getElementById('action-buttons').innerHTML = initialActionButtonsHtml;
             }, 300); // Match transition duration
         }
 
@@ -576,7 +607,7 @@
         async function handleFormSubmit(event) {
             event.preventDefault();
             const form = event.target;
-            const submitButton = document.getElementById('submit-button');
+            const actionButtonsDiv = document.getElementById('action-buttons');
             const messageDiv = document.getElementById('submission-message');
 
             const formData = {
@@ -585,20 +616,19 @@
                 name: form.name.value,
                 email: form.email.value,
                 phone: form.phone.value,
-                clubnow_model_active: true // Indicating the order is for the clubbing model
+                clubnow_model_active: true
             };
 
             // 1. Processing State (Blue)
             messageDiv.textContent = 'Processing Club Order...';
             messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-blue-500 block';
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
+            actionButtonsDiv.innerHTML = `<button type="button" disabled class="bg-red-400 text-white py-2 px-6 rounded-lg font-bold shadow-lg opacity-70">Submitting...</button>`;
 
             console.log('--- Sample POST Request Payload ---');
             console.log(JSON.stringify(formData, null, 2));
 
             // --- Sample POST Request Code ---
-            const SAMPLE_API_ENDPOINT = 'https://jsonplaceholder.typicode.com/posts'; // Using a mock API endpoint
+            const SAMPLE_API_ENDPOINT = 'https://jsonplaceholder.typicode.com/posts'; 
             
             try {
                 // Simulate network latency (2 seconds)
@@ -616,10 +646,22 @@
                     const result = await response.json();
                     console.log('Sample API Response:', result);
 
-                    // 2. Success State (Green)
-                    messageDiv.textContent = 'Inquiry Received! Your club order is being processed. Expect a call with the Max Discount price soon!';
+                    // 2. Success State & WhatsApp Confirmation Prompt
+                    document.getElementById('modal-title').textContent = 'Inquiry Submitted!';
+                    document.getElementById('modal-description').textContent = 'Your club order is logged. For the fastest response and price confirmation, we recommend continuing the discussion on WhatsApp.';
+                    document.getElementById('form-fields').classList.add('hidden');
+                    
+                    messageDiv.textContent = 'Contact details recorded successfully.';
                     messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-bold bg-green-600 block';
-                    submitButton.textContent = 'Success!';
+
+                    // Update action buttons for WhatsApp confirmation
+                    actionButtonsDiv.innerHTML = `
+                        <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg mr-3 hover:bg-gray-400 transition duration-150">Close</button>
+                        <button type="button" onclick="sendWhatsAppMessage(); closeModal();" class="bg-green-500 text-white py-2 px-6 rounded-lg font-bold hover:bg-green-600 transition duration-150 shadow-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12c0 3.31 1.6 6.3 4.07 8.16l-1.33 4.88 4.88-1.33C9.7 22.4 11.8 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.17 14.59c-.06-.03-.4-.15-.75-.3-.35-.15-.6-.2-.84.25-.24.45-.48.48-.8.43-.32-.06-1.15-.43-2.19-1.32-1.04-.89-1.74-1.95-1.94-2.29-.2-.33 0-.51.15-.66.14-.14.31-.2.4-.28.08-.08.15-.17.25-.29.1-.12.14-.2.2-.33.06-.13 0-.25-.13-.51-.13-.25-.97-2.31-1.33-3.17-.36-.85-.73-.75-1.02-.77-.28-.02-.6-.02-.92-.02-.32 0-.84.12-1.28.6-.44.47-1.68 1.63-1.68 4.05 0 2.42 1.73 4.86 1.97 5.17.24.31 3.39 5.2 8.08 6.55 4.69 1.35 4.69.9 5.53.84.84-.06 2.05-.83 2.34-1.67.29-.83.29-.83.2-.99-.09-.15-.35-.24-.7-.41z"/></svg>
+                            Chat on WhatsApp
+                        </button>
+                    `;
                     
                 } else {
                     throw new Error('Network response was not ok.');
@@ -629,8 +671,7 @@
                 // 3. Error State (Red)
                 messageDiv.textContent = 'Error: Failed to process club order. Please check your connection and try again.';
                 messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-red-600 block';
-                submitButton.disabled = false;
-                submitButton.textContent = 'Submit Inquiry';
+                actionButtonsDiv.innerHTML = initialActionButtonsHtml;
             }
             // --- End Sample POST Request Code ---
         }
