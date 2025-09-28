@@ -11,19 +11,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d111b; /* Very dark background */
-            background-image: radial-gradient(#1f2937 1px, transparent 1px); /* Subtle pattern */
-            background-size: 30px 30px;
+            background-color: #f7f7f7; /* Light background */
+            background-image: none;
         }
         /* Custom transitions for the category items */
         .category-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            /* Dark card background for premium feel */
-            background-color: #1f2937; 
+            /* Light card background */
+            background-color: #ffffff; 
         }
         .category-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 15px 25px -5px rgba(245, 158, 11, 0.4), 0 6px 10px -2px rgba(245, 158, 11, 0.2); /* Gold shadow on hover */
+            /* Red shadow on hover */
+            box-shadow: 0 15px 25px -5px rgba(220, 38, 38, 0.2), 0 6px 10px -2px rgba(220, 38, 38, 0.1); 
         }
         .banner-item {
             transition: opacity 1s ease-in-out;
@@ -33,14 +33,14 @@
 <body>
 
     <!-- Header / Navbar -->
-    <header class="bg-gray-900 shadow-xl sticky top-0 z-10 border-b border-yellow-400">
+    <header class="bg-white shadow-xl sticky top-0 z-10 border-b-4 border-red-600">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-3xl font-extrabold text-yellow-400">Clubnow</h1>
-            <nav class="hidden md:flex space-x-8 text-gray-300">
-                <a href="#" class="hover:text-yellow-400 transition duration-150">Home</a>
-                <a href="#categories" class="hover:text-yellow-400 transition duration-150">Max Discount Shop</a>
-                <a href="#about" class="hover:text-yellow-400 transition duration-150">How It Works</a>
-                <a href="#" class="bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition duration-150 shadow-md">Join Now</a>
+            <h1 class="text-3xl font-extrabold text-red-700">Clubnow</h1>
+            <nav class="hidden md:flex space-x-8 text-gray-600">
+                <a href="#" class="hover:text-red-600 transition duration-150">Home</a>
+                <a href="#categories" class="hover:text-red-600 transition duration-150">Max Discount Shop</a>
+                <a href="#about" class="hover:text-red-600 transition duration-150">How It Works</a>
+                <a href="#" class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition duration-150 shadow-md">Join Now</a>
             </nav>
         </div>
     </header>
@@ -52,9 +52,9 @@
             <div class="banner-item absolute inset-0 bg-cover bg-center opacity-100" style="background-image: url('https://placehold.co/1920x400/1e40af/ffffff?text=Club+Orders+for+Maximum+Savings');">
                 <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
                     <div class="text-center p-8">
-                        <h2 class="text-5xl font-extrabold text-yellow-400 mb-4">The Clubnow Advantage: Max Discount Achieved</h2>
+                        <h2 class="text-5xl font-extrabold text-red-400 mb-4">The Clubnow Advantage: Max Discount Achieved</h2>
                         <p class="text-xl text-gray-200">Our unique system clubs orders to get you the lowest price on all major appliances.</p>
-                        <button class="mt-6 bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-500 transition duration-300">Start Saving Today</button>
+                        <button class="mt-6 bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300">Start Saving Today</button>
                     </div>
                 </div>
             </div>
@@ -62,9 +62,9 @@
             <div class="banner-item absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('https://placehold.co/1920x400/065f46/ffffff?text=Premium+Appliances+Secured');">
                 <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
                     <div class="text-center p-8">
-                        <h2 class="text-5xl font-extrabold text-yellow-400 mb-4">Unbeatable Performance, Guaranteed Lowest Price</h2>
-                        <p class="text-xl text-green-300">Access top-tier electronics and home appliances from leading global vendors.</p>
-                        <button class="mt-6 bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-500 transition duration-300">Explore Categories</button>
+                        <h2 class="text-5xl font-extrabold text-red-400 mb-4">Unbeatable Performance, Guaranteed Lowest Price</h2>
+                        <p class="text-xl text-gray-100">Access top-tier electronics and home appliances from leading global vendors.</p>
+                        <button class="mt-6 bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition duration-300">Explore Categories</button>
                     </div>
                 </div>
             </div>
@@ -72,43 +72,43 @@
     </section>
 
     <!-- Introductory Content Section -->
-    <section id="about" class="py-16 bg-gray-900 text-white border-b border-gray-700">
+    <section id="about" class="py-16 bg-white text-gray-900 border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold text-yellow-400 mb-4">How Clubnow Works</h2>
-            <p class="text-xl text-gray-400 mb-12 max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-700 mb-4">How Clubnow Works</h2>
+            <p class="text-xl text-gray-600 mb-12 max-w-4xl mx-auto">
                 Clubnow is built on the power of collective buying. Our system intelligently **clubs orders from different people** for the same product, creating massive bulk purchasing power. This volume allows us to secure the **maximum possible discount** from leading appliance vendors, passing those savings directly to you.
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 bg-gray-800 rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:bg-gray-700 border border-yellow-600/30">
-                    <div class="text-4xl text-yellow-400 mb-3">🤝</div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">Collective Ordering</h3>
-                    <p class="text-gray-400">Your inquiry joins a pool of others, increasing total purchase volume instantly.</p>
+                <div class="p-6 bg-red-50 rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:bg-red-100 border border-red-600/30">
+                    <div class="text-4xl text-red-700 mb-3">🤝</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Collective Ordering</h3>
+                    <p class="text-gray-600">Your inquiry joins a pool of others, increasing total purchase volume instantly.</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:bg-gray-700 border border-yellow-600/30">
-                    <div class="text-4xl text-yellow-400 mb-3">💰</div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">Maximum Discounts</h3>
-                    <p class="text-gray-400">We leverage bulk volume to negotiate discounts unavailable through standard retail.</p>
+                <div class="p-6 bg-red-50 rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:bg-red-100 border border-red-600/30">
+                    <div class="text-4xl text-red-700 mb-3">💰</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Maximum Discounts</h3>
+                    <p class="text-gray-600">We leverage bulk volume to negotiate discounts unavailable through standard retail.</p>
                 </div>
-                <div class="p-6 bg-gray-800 rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:bg-gray-700 border border-yellow-600/30">
-                    <div class="text-4xl text-yellow-400 mb-3">🚀</div>
-                    <h3 class="text-xl font-semibold mb-2 text-white">Premium Appliances</h3>
-                    <p class="text-gray-400">Get top-of-the-line electronics without paying the top-tier price.</p>
+                <div class="p-6 bg-red-50 rounded-xl shadow-lg transition duration-300 hover:shadow-xl hover:bg-red-100 border border-red-600/30">
+                    <div class="text-4xl text-red-700 mb-3">🚀</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Premium Appliances</h3>
+                    <p class="text-gray-600">Get top-of-the-line electronics without paying the top-tier price.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Main Category Explorer Section -->
-    <section id="categories" class="py-16">
+    <section id="categories" class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-white mb-8 text-center">Find Your Appliance at Club Prices</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Find Your Appliance at Club Prices</h2>
 
             <!-- Breadcrumb Navigation -->
             <div class="mb-6">
-                <ol id="breadcrumb" class="flex flex-wrap items-center text-sm text-gray-400">
+                <ol id="breadcrumb" class="flex flex-wrap items-center text-sm text-gray-600">
                     <li class="flex items-center">
-                        <span class="font-medium text-yellow-400 cursor-pointer hover:underline" onclick="navigateToLevel(0)">Home</span>
+                        <span class="font-medium text-red-700 cursor-pointer hover:underline" onclick="navigateToLevel(0)">Home</span>
                     </li>
                 </ol>
             </div>
@@ -124,37 +124,37 @@
     <!-- Contact Modal (Hidden by default) -->
     <div id="contact-modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 hidden transition duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div id="modal-content" class="bg-gray-800 rounded-xl shadow-2xl p-6 w-full max-w-lg transform transition-all duration-300 scale-95 opacity-0 border border-yellow-500/50">
+            <div id="modal-content" class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg transform transition-all duration-300 scale-95 opacity-0 border border-red-600/50">
                 <div class="flex justify-between items-start mb-4">
-                    <h3 class="text-2xl font-bold text-yellow-400" id="modal-title">Inquire for Club Pricing on <span id="final-selection-name" class="text-white">Product</span></h3>
-                    <button onclick="closeModal()" class="text-gray-400 hover:text-white transition">
+                    <h3 class="text-2xl font-bold text-red-700" id="modal-title">Inquire for Club Pricing on <span id="final-selection-name" class="text-gray-900">Product</span></h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </div>
 
-                <p class="text-sm text-gray-400 mb-6">Provide your contact details below. Once enough collective orders are met, our specialist will contact you with the final, maximized discount price.</p>
+                <p class="text-sm text-gray-600 mb-6">Provide your contact details below. Once enough collective orders are met, our specialist will contact you with the final, maximized discount price.</p>
 
                 <form id="contact-form" onsubmit="handleFormSubmit(event)">
                     <div class="space-y-4">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-yellow-400 focus:border-yellow-400 transition duration-150">
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-red-600 focus:border-red-600 transition duration-150">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-yellow-400 focus:border-yellow-400 transition duration-150">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-red-600 focus:border-red-600 transition duration-150">
                         </div>
                         <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-300 mb-1">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-yellow-400 focus:border-yellow-400 transition duration-150">
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-red-600 focus:border-red-600 transition duration-150">
                         </div>
                     </div>
 
                     <div id="submission-message" class="mt-4 text-center p-3 rounded-lg text-white font-medium hidden"></div>
 
                     <div class="mt-6 flex justify-end">
-                        <button type="button" onclick="closeModal()" class="bg-gray-600 text-white py-2 px-4 rounded-lg mr-3 hover:bg-gray-700 transition duration-150">Cancel</button>
-                        <button type="submit" id="submit-button" class="bg-yellow-400 text-gray-900 py-2 px-6 rounded-lg font-bold hover:bg-yellow-500 transition duration-150 shadow-lg">Submit Inquiry</button>
+                        <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg mr-3 hover:bg-gray-400 transition duration-150">Cancel</button>
+                        <button type="submit" id="submit-button" class="bg-red-600 text-white py-2 px-6 rounded-lg font-bold hover:bg-red-700 transition duration-150 shadow-lg">Submit Inquiry</button>
                     </div>
                 </form>
             </div>
@@ -163,12 +163,12 @@
 
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-8 mt-12 border-t border-gray-700">
+    <footer class="bg-gray-800 text-gray-400 py-8 mt-12 border-t border-red-600">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; 2024 Clubnow. The future of discounted appliances.</p>
             <div class="flex justify-center space-x-4 mt-3 text-sm text-gray-500">
-                <a href="#" class="hover:text-yellow-400">Privacy Policy</a>
-                <a href="#" class="hover:text-yellow-400">Terms of Clubbing</a>
+                <a href="#" class="hover:text-red-400">Privacy Policy</a>
+                <a href="#" class="hover:text-red-400">Terms of Clubbing</a>
             </div>
         </div>
     </footer>
@@ -296,9 +296,7 @@
                 ]},
                 { name: "Carbon Filter", id: "CF", children: [
                     { name: "Medium Room (300 sqft)", id: "MR", children: [
-                        { name: "Standard Sensor", id: "SS", children: [
-                            { name: "Timer & Sleep Mode", isFinal: true, id: "TSM" }
-                        ]}
+                        { name: "Standard Sensor", isFinal: true, id: "TSM" }
                     ]}
                 ]}
             ]},
@@ -445,8 +443,8 @@
                 const imageColor = ['F59E0B', '10B981', 'EF4444', '4F46E5'][currentPath.length % 4]; 
                 const image = category.image || `https://placehold.co/400x300/${imageColor}/000000?text=Level+${currentPath.length + 1}`;
                 
-                // Use gold/yellow for final inquiry button
-                const actionClass = isFinal ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-500 font-bold' : 'bg-gray-700 text-white hover:bg-gray-600';
+                // Use RED for final inquiry button, light gray for others
+                const actionClass = isFinal ? 'bg-red-600 text-white hover:bg-red-700 font-bold' : 'bg-gray-200 text-gray-700 hover:bg-gray-300';
                 const buttonText = isFinal ? 'Inquire for Club Price' : 'Explore Sub-Categories';
 
                 // Render image only for Level 1 categories
@@ -454,11 +452,11 @@
                     `<img src="${image}" onerror="this.src='https://placehold.co/400x300/3b82f6/ffffff?text=Image+Missing'" alt="${category.name}" class="w-full h-48 object-cover rounded-t-xl transition duration-500 group-hover:opacity-80">` : '';
 
                 const cardHtml = `
-                    <div class="category-card group bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 hover:border-yellow-400">
+                    <div class="category-card group bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:border-red-600">
                         ${imageHtml}
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-3 ${isFinal ? 'text-yellow-400' : 'text-gray-100'}">${category.name}</h3>
-                            <p class="text-sm text-gray-400 mb-4">${isFinal ? 'This final selection qualifies for Max Club Discount!' : `(${category.children ? category.children.length : 0} options)`}</p>
+                            <h3 class="text-xl font-semibold mb-3 ${isFinal ? 'text-red-700' : 'text-gray-800'}">${category.name}</h3>
+                            <p class="text-sm text-gray-600 mb-4">${isFinal ? 'This final selection qualifies for Max Club Discount!' : `(${category.children ? category.children.length : 0} options)`}</p>
                             
                             <button 
                                 onclick="handleCategoryClick('${category.id}', ${isFinal})" 
@@ -480,7 +478,7 @@
             const breadcrumb = document.getElementById('breadcrumb');
             let html = `
                 <li class="flex items-center">
-                    <span class="font-medium text-gray-400 cursor-pointer hover:text-yellow-400 transition" onclick="navigateToLevel(0)">Home</span>
+                    <span class="font-medium text-gray-600 cursor-pointer hover:text-red-700 transition" onclick="navigateToLevel(0)">Home</span>
                 </li>
             `;
 
@@ -495,8 +493,8 @@
                     
                     html += `
                         <li class="flex items-center">
-                            <span class="mx-2 text-gray-500">/</span>
-                            <span class="font-medium ${i === currentPath.length - 1 ? 'text-yellow-400' : 'text-gray-400 cursor-pointer hover:text-yellow-400 transition'}" 
+                            <span class="mx-2 text-gray-400">/</span>
+                            <span class="font-medium ${i === currentPath.length - 1 ? 'text-red-700' : 'text-gray-600 cursor-pointer hover:text-red-700 transition'}" 
                                 onclick="navigateToLevel(${i + 1})">
                                 ${category.name}
                             </span>
@@ -590,8 +588,9 @@
                 clubnow_model_active: true // Indicating the order is for the clubbing model
             };
 
+            // 1. Processing State (Blue)
             messageDiv.textContent = 'Processing Club Order...';
-            messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-yellow-600 block';
+            messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-blue-500 block';
             submitButton.disabled = true;
             submitButton.textContent = 'Submitting...';
 
@@ -617,8 +616,9 @@
                     const result = await response.json();
                     console.log('Sample API Response:', result);
 
+                    // 2. Success State (Green)
                     messageDiv.textContent = 'Inquiry Received! Your club order is being processed. Expect a call with the Max Discount price soon!';
-                    messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-gray-900 font-bold bg-yellow-400 block';
+                    messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-bold bg-green-600 block';
                     submitButton.textContent = 'Success!';
                     
                 } else {
@@ -626,6 +626,7 @@
                 }
             } catch (error) {
                 console.error('Submission failed:', error);
+                // 3. Error State (Red)
                 messageDiv.textContent = 'Error: Failed to process club order. Please check your connection and try again.';
                 messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-red-600 block';
                 submitButton.disabled = false;
