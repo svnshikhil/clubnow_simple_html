@@ -22,12 +22,12 @@
         .category-list-item {
             cursor: pointer;
         }
-        /* List item hover effect */
+        /* List item hover effect (Light Yellow) */
         .category-list-item > div:first-child {
             transition: background-color 0.2s ease, transform 0.1s ease;
         }
         .category-list-item > div:first-child:hover {
-            background-color: #fff7ed; /* Light amber hover */
+            background-color: #fefce8; /* Very light yellow hover */
             transform: translateY(-1px);
         }
 
@@ -37,15 +37,15 @@
 
         /* Ensure fixed elements are above content */
         .fixed-header {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid #fcd34d; /* Yellow border line */
         }
         .fixed-nav {
-            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -2px 4px -1px rgba(0, 0, 0, 0.1);
         }
 
         /* Adjustments for Mobile Viewports */
         @media (max-width: 768px) {
-            /* Keep scrollable for long lists */
             #category-list {
                 padding-bottom: 2rem; 
             }
@@ -54,21 +54,21 @@
 </head>
 <body>
 
-    <!-- Fixed Mobile Header -->
-    <header class="fixed-header fixed top-0 left-0 right-0 bg-gray-900 text-white z-20">
+    <!-- Fixed Mobile Header (White Background) -->
+    <header class="fixed-header fixed top-0 left-0 right-0 bg-white text-gray-900 z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-extrabold text-amber-500">Clubnow App</h1>
+            <h1 class="text-2xl font-extrabold text-yellow-600">Clubnow App</h1>
             <!-- Menu/Settings Icon for Mobile (Placeholder for functionality) -->
-            <button class="text-amber-500 hover:text-amber-400 p-2 rounded-full">
+            <button class="text-yellow-600 hover:text-yellow-500 p-2 rounded-full">
                 <!-- Settings Icon -->
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
             <!-- Desktop Navigation (Hidden on Mobile) -->
-            <nav class="hidden md:flex space-x-8 text-gray-300">
-                <a href="#" class="hover:text-amber-500 transition duration-150">Home</a>
-                <a href="#categories" class="hover:text-amber-500 transition duration-150">Max Discount Shop</a>
-                <a href="#about" class="hover:text-amber-500 transition duration-150">How It Works</a>
-                <a href="#" class="bg-amber-500 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-amber-400 transition duration-150 shadow-md">Join Now</a>
+            <nav class="hidden md:flex space-x-8 text-gray-700">
+                <a href="#" class="hover:text-yellow-600 transition duration-150">Home</a>
+                <a href="#categories" class="hover:text-yellow-600 transition duration-150">Max Discount Shop</a>
+                <a href="#about" class="hover:text-yellow-600 transition duration-150">How It Works</a>
+                <a href="#" class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition duration-150 shadow-md">Join Now</a>
             </nav>
         </div>
     </header>
@@ -76,23 +76,23 @@
     <!-- Full-Width Auto-Changing Banner -->
     <section class="w-full relative h-64 sm:h-80 overflow-hidden">
         <div id="banner-container" class="h-full">
-            <!-- Banner Item 1: Clubbing Model Focus -->
-            <div class="banner-item absolute inset-0 bg-cover bg-center opacity-100" style="background-image: url('https://placehold.co/1920x400/122a45/ffffff?text=Club+Orders+for+Maximum+Savings');">
-                <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4">
+            <!-- Banner Item 1: Clubbing Model Focus (using yellow/dark text for contrast) -->
+            <div class="banner-item absolute inset-0 bg-cover bg-center opacity-100" style="background-image: url('https://placehold.co/1920x400/fef08a/1f2937?text=Club+Orders+for+Maximum+Savings');">
+                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
                     <div class="text-center">
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-500 mb-2">Max Discount Achieved</h2>
-                        <p class="text-md sm:text-lg text-gray-200 hidden sm:block">Our unique system clubs orders to get you the lowest price.</p>
-                        <button class="mt-4 bg-amber-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-amber-400 transition duration-300 text-sm">Start Saving Today</button>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-2 shadow-text">Max Discount Achieved</h2>
+                        <p class="text-md sm:text-lg text-yellow-300 hidden sm:block">Our unique system clubs orders to get you the lowest price.</p>
+                        <button class="mt-4 bg-yellow-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-yellow-600 transition duration-300 text-sm">Start Saving Today</button>
                     </div>
                 </div>
             </div>
-            <!-- Banner Item 2: Premium Products -->
-            <div class="banner-item absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('https://placehold.co/1920x400/065f46/ffffff?text=Premium+Appliances+Secured');">
-                <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4">
+            <!-- Banner Item 2: Premium Products (using yellow/dark text for contrast) -->
+            <div class="banner-item absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('https://placehold.co/1920x400/d9f991/1f2937?text=Premium+Appliances+Secured');">
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4">
                     <div class="text-center">
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-500 mb-2">Guaranteed Lowest Price</h2>
-                        <p class="text-md sm:text-lg text-gray-100 hidden sm:block">Access top-tier electronics from leading global vendors.</p>
-                        <button class="mt-4 bg-amber-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-amber-400 transition duration-300 text-sm">Explore Categories</button>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-2 shadow-text">Guaranteed Lowest Price</h2>
+                        <p class="text-md sm:text-lg text-yellow-300 hidden sm:block">Access top-tier electronics from leading global vendors.</p>
+                        <button class="mt-4 bg-yellow-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-yellow-600 transition duration-300 text-sm">Explore Categories</button>
                     </div>
                 </div>
             </div>
@@ -108,16 +108,16 @@
             </p>
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-                <div class="p-4 bg-gray-50 rounded-xl shadow-md border border-gray-200">
-                    <div class="text-2xl text-amber-500 mb-1">🤝</div>
+                <div class="p-4 bg-yellow-50 rounded-xl shadow-md border border-yellow-200">
+                    <div class="text-2xl text-yellow-600 mb-1">🤝</div>
                     <h3 class="text-lg font-semibold mb-1 text-gray-900">Collective Ordering</h3>
                 </div>
-                <div class="p-4 bg-gray-50 rounded-xl shadow-md border border-gray-200">
-                    <div class="text-2xl text-amber-500 mb-1">💰</div>
+                <div class="p-4 bg-yellow-50 rounded-xl shadow-md border border-yellow-200">
+                    <div class="text-2xl text-yellow-600 mb-1">💰</div>
                     <h3 class="text-lg font-semibold mb-1 text-gray-900">Max Discounts</h3>
                 </div>
-                <div class="p-4 bg-gray-50 rounded-xl shadow-md border border-gray-200">
-                    <div class="text-2xl text-amber-500 mb-1">🚀</div>
+                <div class="p-4 bg-yellow-50 rounded-xl shadow-md border border-yellow-200">
+                    <div class="text-2xl text-yellow-600 mb-1">🚀</div>
                     <h3 class="text-lg font-semibold mb-1 text-gray-900">Premium Appliances</h3>
                 </div>
             </div>
@@ -129,8 +129,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-xl font-bold text-gray-900 mb-4 text-center">Select Your Product Configuration</h2>
 
-            <!-- Breadcrumb Navigation Removed - Replaced by Collapsible List -->
-            
             <!-- Dynamic Category List Container (Collapsible List View) -->
             <div id="category-list" class="flex flex-col gap-1 rounded-xl overflow-hidden shadow-lg border border-gray-200">
                 <!-- Categories will be rendered here by JavaScript -->
@@ -142,9 +140,9 @@
     <!-- Contact Modal (Hidden by default) -->
     <div id="contact-modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 hidden transition duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div id="modal-content" class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg transform transition-all duration-300 scale-95 opacity-0 border border-amber-500/50">
+            <div id="modal-content" class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg transform transition-all duration-300 scale-95 opacity-0 border border-yellow-500/50">
                 <div class="flex justify-between items-start mb-4">
-                    <h3 class="text-2xl font-bold text-gray-900" id="modal-title">Inquire for Club Pricing on <span id="final-selection-name" class="text-amber-600">Product</span></h3>
+                    <h3 class="text-2xl font-bold text-gray-900" id="modal-title">Inquire for Club Pricing on <span id="final-selection-name" class="text-yellow-600">Product</span></h3>
                     <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -156,15 +154,15 @@
                     <div id="form-fields" class="space-y-4">
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-amber-500 focus:border-amber-500 transition duration-150">
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 transition duration-150">
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-amber-500 focus:border-amber-500 transition duration-150">
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 transition duration-150">
                         </div>
                         <div>
                             <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-amber-500 focus:border-amber-500 transition duration-150">
+                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 transition duration-150">
                         </div>
                     </div>
 
@@ -172,7 +170,7 @@
 
                     <div id="action-buttons" class="mt-6 flex justify-end">
                         <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-3 px-5 rounded-lg mr-3 hover:bg-gray-400 transition duration-150 font-medium">Cancel</button>
-                        <button type="submit" id="submit-button" class="bg-amber-500 text-gray-900 py-3 px-6 rounded-lg font-bold hover:bg-amber-400 transition duration-150 shadow-lg">Submit Inquiry</button>
+                        <button type="submit" id="submit-button" class="bg-yellow-500 text-gray-900 py-3 px-6 rounded-lg font-bold hover:bg-yellow-600 transition duration-150 shadow-lg">Submit Inquiry</button>
                     </div>
                 </form>
             </div>
@@ -188,39 +186,39 @@
     </button>
 
 
-    <!-- Fixed Mobile Bottom Navigation Bar (App Feel) -->
-    <footer class="fixed-nav fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-700 z-20 md:hidden">
-        <nav class="flex justify-around items-center h-16 text-gray-400 text-xs">
+    <!-- Fixed Mobile Bottom Navigation Bar (App Feel - White Background) -->
+    <footer class="fixed-nav fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-20 md:hidden">
+        <nav class="flex justify-around items-center h-16 text-gray-500 text-xs">
             <!-- Home -->
-            <a href="#" class="flex flex-col items-center p-1 text-amber-500">
+            <a href="#" class="flex flex-col items-center p-1 text-yellow-600">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span class="mt-1 font-semibold">Home</span>
             </a>
             <!-- Shop (Categories) -->
-            <a href="#categories" class="flex flex-col items-center p-1 hover:text-amber-500">
+            <a href="#categories" class="flex flex-col items-center p-1 hover:text-yellow-600">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M13 13.9c1.67-.5 3-2.02 3-3.9 0-2.21-1.79-4-4-4s-4 1.79-4 4c0 1.88 1.33 3.4 3 3.9v3.1h-2v2h6v-2h-2z"/></svg>
                 <span class="mt-1">Shop</span>
             </a>
             <!-- About -->
-            <a href="#about" class="flex flex-col items-center p-1 hover:text-amber-500">
+            <a href="#about" class="flex flex-col items-center p-1 hover:text-yellow-600">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                 <span class="mt-1">About</span>
             </a>
             <!-- Profile (Join Now) -->
-            <a href="#" class="flex flex-col items-center p-1 hover:text-amber-500">
+            <a href="#" class="flex flex-col items-center p-1 hover:text-yellow-600">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                 <span class="mt-1">Profile</span>
             </a>
         </nav>
     </footer>
 
-    <!-- Desktop Footer (still present for large screens) -->
-    <footer class="bg-gray-900 text-gray-400 py-8 mt-12 border-t border-amber-500 hidden md:block">
+    <!-- Desktop Footer (still present for large screens - White Background) -->
+    <footer class="bg-white text-gray-600 py-8 mt-12 border-t border-gray-200 hidden md:block">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; 2024 Clubnow. The future of discounted appliances.</p>
             <div class="flex justify-center space-x-4 mt-3 text-sm text-gray-500">
-                <a href="#" class="hover:text-amber-400">Privacy Policy</a>
-                <a href="#" class="hover:text-amber-400">Terms of Clubbing</a>
+                <a href="#" class="hover:text-yellow-600">Privacy Policy</a>
+                <a href="#" class="hover:text-yellow-600">Terms of Clubbing</a>
             </div>
         </div>
     </footer>
@@ -452,7 +450,7 @@
             let html = '';
             // Define styling based on nesting level
             const levelClasses = [
-                'font-bold text-lg py-4 px-4 bg-gray-900 text-amber-500 rounded-t-xl', // Level 0: Main Category Header
+                'font-bold text-lg py-4 px-4 bg-yellow-600 text-white rounded-t-xl', // Level 0: Main Category Header - NEW: Yellow background, white text
                 'font-semibold text-base py-3 px-4', // Level 1: Main Type
                 'font-medium text-base py-3 px-4 pl-8', // Level 2: Capacity/Size
                 'font-normal text-sm py-3 px-4 pl-12', // Level 3: Key Feature
@@ -460,7 +458,7 @@
             ];
 
             const textClasses = [
-                'text-amber-500', 
+                'text-white', // Level 0 text color (set in levelClasses but kept here for consistency)
                 'text-gray-900', 
                 'text-gray-800', 
                 'text-gray-700', 
@@ -477,14 +475,14 @@
                 const currentLevelClass = levelClasses[Math.min(level, levelClasses.length - 1)];
                 const currentTextClass = textClasses[Math.min(level, textClasses.length - 1)];
 
-                const bgColorClass = level === 0 ? 'bg-gray-900' : 'bg-white';
+                const bgColorClass = level === 0 ? 'bg-yellow-600' : 'bg-white';
                 
                 // Main category item structure
                 html += `
                     <div class="category-list-item overflow-hidden" 
                          onclick="event.stopPropagation(); handleCategoryClick('${category.name}', '${category.id}', ${isFinal}, '${collapseId}')">
                         
-                        <div class="flex items-center justify-between transition duration-150 ${currentLevelClass} ${currentTextClass} ${bgColorClass} ${!isFinal ? 'border-b border-gray-100' : ''} ${level === 0 ? 'shadow-md mt-4 first:mt-0' : 'hover:bg-gray-50'}"
+                        <div class="flex items-center justify-between transition duration-150 ${currentLevelClass} ${currentTextClass} ${bgColorClass} ${!isFinal && level > 0 ? 'border-b border-gray-100' : ''} ${level === 0 ? 'shadow-md mt-4 first:mt-0' : 'hover:bg-yellow-50'}"
                              style="${level > 0 ? `padding-left: ${16 + level * 8}px;` : ''}"
                              >
                             
@@ -494,9 +492,9 @@
                             
                             <div class="flex items-center space-x-2 flex-shrink-0">
                                 ${isFinal 
-                                    ? `<span class="text-sm font-bold text-amber-500 bg-amber-500/10 px-2 py-1 rounded-full">Inquire Now</span>` 
+                                    ? `<span class="text-sm font-bold text-yellow-600 bg-yellow-500/20 px-2 py-1 rounded-full">Inquire Now</span>` // Updated to Yellow accent
                                     : hasChildren 
-                                        ? `<svg id="arrow-${collapseId}" class="w-5 h-5 text-gray-500 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`
+                                        ? `<svg id="arrow-${collapseId}" class="w-5 h-5 ${level === 0 ? 'text-white' : 'text-gray-500'} transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`
                                         : ''
                                 }
                             </div>
@@ -542,10 +540,26 @@
                     // Toggle arrow rotation
                     arrowElement.classList.toggle('rotate-90', isHidden);
 
-                    // Smoothly scroll to the clicked element if expanding (better mobile UX)
+                    // --- FIX FOR JARRING SCROLL ---
                     if (isHidden) {
-                        collapseElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        const clickedItem = collapseElement.parentNode; // The .category-list-item div
+                        const rect = clickedItem.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight;
+                        // Fixed header allowance (approx height of header + padding, roughly 5rem = 80px)
+                        const fixedHeaderAllowance = 80; 
+
+                        // 1. If the item is expanding AND its top is under the fixed header
+                        if (rect.top < fixedHeaderAllowance) {
+                            // Scroll the item to the top, just below the fixed header (using 'start')
+                            clickedItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        } 
+                        // 2. If the item is expanding AND its bottom is outside the viewport (at the bottom)
+                        else if (rect.bottom > viewportHeight) {
+                            // Scroll the item into view, aligning to the bottom of the viewport
+                            clickedItem.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                        }
                     }
+                    // --- END FIX FOR JARRING SCROLL ---
                 }
             }
         }
@@ -567,7 +581,7 @@
 
         const initialActionButtonsHtml = `
             <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-3 px-5 rounded-lg mr-3 hover:bg-gray-400 transition duration-150 font-medium">Cancel</button>
-            <button type="submit" id="submit-button" class="bg-amber-500 text-gray-900 py-3 px-6 rounded-lg font-bold hover:bg-amber-400 transition duration-150 shadow-lg">Submit Inquiry</button>
+            <button type="submit" id="submit-button" class="bg-yellow-500 text-gray-900 py-3 px-6 rounded-lg font-bold hover:bg-yellow-600 transition duration-150 shadow-lg">Submit Inquiry</button>
         `;
 
         function openModal() {
@@ -581,7 +595,7 @@
             content.classList.add('scale-100', 'opacity-100');
 
             // Reset UI state for form
-            document.getElementById('modal-title').innerHTML = `Inquire for Club Pricing on <span id="final-selection-name" class="text-amber-600">${document.getElementById('final-selection-name').textContent}</span>`;
+            document.getElementById('modal-title').innerHTML = `Inquire for Club Pricing on <span id="final-selection-name" class="text-yellow-600">${document.getElementById('final-selection-name').textContent}</span>`;
             document.getElementById('modal-description').textContent = "Provide your contact details below. Once enough collective orders are met, our specialist will contact you with the final, maximized discount price.";
             document.getElementById('form-fields').classList.remove('hidden');
             document.getElementById('action-buttons').innerHTML = initialActionButtonsHtml;
@@ -622,10 +636,10 @@
                 clubnow_model_active: true
             };
 
-            // 1. Processing State (Dark Blue/Gray)
+            // 1. Processing State (Gray background, dark text for light theme)
             messageDiv.textContent = 'Processing Club Order...';
-            messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-gray-700 block';
-            actionButtonsDiv.innerHTML = `<button type="button" disabled class="bg-amber-400 text-gray-900 py-3 px-6 rounded-lg font-bold shadow-lg opacity-70">Submitting...</button>`;
+            messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-gray-900 font-medium bg-gray-300 block';
+            actionButtonsDiv.innerHTML = `<button type="button" disabled class="bg-yellow-400 text-gray-900 py-3 px-6 rounded-lg font-bold shadow-lg opacity-70">Submitting...</button>`;
 
             console.log('--- Sample POST Request Payload ---');
             console.log(JSON.stringify(formData, null, 2));
@@ -649,7 +663,7 @@
                     const result = await response.json();
                     console.log('Sample API Response:', result);
 
-                    // 2. Success State & WhatsApp Confirmation Prompt (Keep Green for Success Semantic)
+                    // 2. Success State & WhatsApp Confirmation Prompt (Green for Success Semantic)
                     document.getElementById('modal-title').textContent = 'Inquiry Submitted!';
                     document.getElementById('modal-description').textContent = 'Your club order is logged. For the fastest response and price confirmation, we recommend continuing the discussion on WhatsApp.';
                     document.getElementById('form-fields').classList.add('hidden');
