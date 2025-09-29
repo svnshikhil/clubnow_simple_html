@@ -18,27 +18,16 @@
             padding-bottom: 4rem; /* Space for fixed bottom navigation */
             min-height: 100vh;
         }
-        /* Custom styles for grid view (Level 1) */
-        .category-grid-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: #ffffff; 
-        }
-        .category-grid-card:hover {
-            transform: translateY(-4px);
-            /* Red shadow on hover */
-            box-shadow: 0 10px 20px -3px rgba(220, 38, 38, 0.2), 0 4px 8px -1px rgba(220, 38, 38, 0.1); 
-        }
-
-        /* Custom styles for list view (Levels 2+) */
+        /* Custom styles for the list view */
         .category-list-item {
-            background-color: #ffffff;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
             cursor: pointer;
+        }
+        /* List item hover effect */
+        .category-list-item > div:first-child {
             transition: background-color 0.2s ease, transform 0.1s ease;
         }
-        .category-list-item:hover {
-            background-color: #fff5f5; /* Light red hover */
+        .category-list-item > div:first-child:hover {
+            background-color: #fff7ed; /* Light amber hover */
             transform: translateY(-1px);
         }
 
@@ -56,10 +45,9 @@
 
         /* Adjustments for Mobile Viewports */
         @media (max-width: 768px) {
-            /* Scrollable breadcrumb for long paths on mobile */
-            #breadcrumb {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+            /* Keep scrollable for long lists */
+            #category-list {
+                padding-bottom: 2rem; 
             }
         }
     </style>
@@ -67,20 +55,20 @@
 <body>
 
     <!-- Fixed Mobile Header -->
-    <header class="fixed-header fixed top-0 left-0 right-0 bg-white z-20 border-b-4 border-red-600">
+    <header class="fixed-header fixed top-0 left-0 right-0 bg-gray-900 text-white z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-extrabold text-red-700">Clubnow App</h1>
+            <h1 class="text-2xl font-extrabold text-amber-500">Clubnow App</h1>
             <!-- Menu/Settings Icon for Mobile (Placeholder for functionality) -->
-            <button class="text-gray-700 hover:text-red-700 p-2 rounded-full">
+            <button class="text-amber-500 hover:text-amber-400 p-2 rounded-full">
                 <!-- Settings Icon -->
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
             <!-- Desktop Navigation (Hidden on Mobile) -->
-            <nav class="hidden md:flex space-x-8 text-gray-600">
-                <a href="#" class="hover:text-red-600 transition duration-150">Home</a>
-                <a href="#categories" class="hover:text-red-600 transition duration-150">Max Discount Shop</a>
-                <a href="#about" class="hover:text-red-600 transition duration-150">How It Works</a>
-                <a href="#" class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition duration-150 shadow-md">Join Now</a>
+            <nav class="hidden md:flex space-x-8 text-gray-300">
+                <a href="#" class="hover:text-amber-500 transition duration-150">Home</a>
+                <a href="#categories" class="hover:text-amber-500 transition duration-150">Max Discount Shop</a>
+                <a href="#about" class="hover:text-amber-500 transition duration-150">How It Works</a>
+                <a href="#" class="bg-amber-500 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-amber-400 transition duration-150 shadow-md">Join Now</a>
             </nav>
         </div>
     </header>
@@ -89,12 +77,12 @@
     <section class="w-full relative h-64 sm:h-80 overflow-hidden">
         <div id="banner-container" class="h-full">
             <!-- Banner Item 1: Clubbing Model Focus -->
-            <div class="banner-item absolute inset-0 bg-cover bg-center opacity-100" style="background-image: url('https://placehold.co/1920x400/1e40af/ffffff?text=Club+Orders+for+Maximum+Savings');">
+            <div class="banner-item absolute inset-0 bg-cover bg-center opacity-100" style="background-image: url('https://placehold.co/1920x400/122a45/ffffff?text=Club+Orders+for+Maximum+Savings');">
                 <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4">
                     <div class="text-center">
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-red-400 mb-2">Max Discount Achieved</h2>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-500 mb-2">Max Discount Achieved</h2>
                         <p class="text-md sm:text-lg text-gray-200 hidden sm:block">Our unique system clubs orders to get you the lowest price.</p>
-                        <button class="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-red-700 transition duration-300 text-sm">Start Saving Today</button>
+                        <button class="mt-4 bg-amber-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-amber-400 transition duration-300 text-sm">Start Saving Today</button>
                     </div>
                 </div>
             </div>
@@ -102,9 +90,9 @@
             <div class="banner-item absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('https://placehold.co/1920x400/065f46/ffffff?text=Premium+Appliances+Secured');">
                 <div class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4">
                     <div class="text-center">
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-red-400 mb-2">Guaranteed Lowest Price</h2>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-amber-500 mb-2">Guaranteed Lowest Price</h2>
                         <p class="text-md sm:text-lg text-gray-100 hidden sm:block">Access top-tier electronics from leading global vendors.</p>
-                        <button class="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-red-700 transition duration-300 text-sm">Explore Categories</button>
+                        <button class="mt-4 bg-amber-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-amber-400 transition duration-300 text-sm">Explore Categories</button>
                     </div>
                 </div>
             </div>
@@ -114,22 +102,22 @@
     <!-- Introductory Content Section -->
     <section id="about" class="py-8 sm:py-12 bg-white text-gray-900 border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl font-bold text-red-700 mb-4">How Clubnow Works</h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">How Clubnow Works</h2>
             <p class="text-sm text-gray-600 mb-6 max-w-4xl mx-auto">
                 We intelligently **club orders from different people**, creating massive bulk purchasing power to secure the **maximum possible discount**.
             </p>
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-                <div class="p-4 bg-red-50 rounded-xl shadow-md border border-red-600/30">
-                    <div class="text-2xl text-red-700 mb-1">🤝</div>
+                <div class="p-4 bg-gray-50 rounded-xl shadow-md border border-gray-200">
+                    <div class="text-2xl text-amber-500 mb-1">🤝</div>
                     <h3 class="text-lg font-semibold mb-1 text-gray-900">Collective Ordering</h3>
                 </div>
-                <div class="p-4 bg-red-50 rounded-xl shadow-md border border-red-600/30">
-                    <div class="text-2xl text-red-700 mb-1">💰</div>
+                <div class="p-4 bg-gray-50 rounded-xl shadow-md border border-gray-200">
+                    <div class="text-2xl text-amber-500 mb-1">💰</div>
                     <h3 class="text-lg font-semibold mb-1 text-gray-900">Max Discounts</h3>
                 </div>
-                <div class="p-4 bg-red-50 rounded-xl shadow-md border border-red-600/30">
-                    <div class="text-2xl text-red-700 mb-1">🚀</div>
+                <div class="p-4 bg-gray-50 rounded-xl shadow-md border border-gray-200">
+                    <div class="text-2xl text-amber-500 mb-1">🚀</div>
                     <h3 class="text-lg font-semibold mb-1 text-gray-900">Premium Appliances</h3>
                 </div>
             </div>
@@ -139,19 +127,12 @@
     <!-- Main Category Explorer Section -->
     <section id="categories" class="py-8 bg-gray-50 flex-grow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">Find Your Appliance at Club Prices</h2>
+            <h2 class="text-xl font-bold text-gray-900 mb-4 text-center">Select Your Product Configuration</h2>
 
-            <!-- Breadcrumb Navigation -->
-            <div class="mb-4">
-                <ol id="breadcrumb" class="flex flex-wrap items-center text-xs text-gray-600 p-2 bg-white rounded-lg shadow-inner overflow-x-auto whitespace-nowrap">
-                    <li class="flex items-center">
-                        <span class="font-medium text-red-700 cursor-pointer hover:underline" onclick="navigateToLevel(0)">Home</span>
-                    </li>
-                </ol>
-            </div>
-
-            <!-- Dynamic Category List Container (Changes presentation based on level) -->
-            <div id="category-list" class="gap-4 sm:gap-6">
+            <!-- Breadcrumb Navigation Removed - Replaced by Collapsible List -->
+            
+            <!-- Dynamic Category List Container (Collapsible List View) -->
+            <div id="category-list" class="flex flex-col gap-1 rounded-xl overflow-hidden shadow-lg border border-gray-200">
                 <!-- Categories will be rendered here by JavaScript -->
             </div>
 
@@ -161,9 +142,9 @@
     <!-- Contact Modal (Hidden by default) -->
     <div id="contact-modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 hidden transition duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div id="modal-content" class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg transform transition-all duration-300 scale-95 opacity-0 border border-red-600/50">
+            <div id="modal-content" class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg transform transition-all duration-300 scale-95 opacity-0 border border-amber-500/50">
                 <div class="flex justify-between items-start mb-4">
-                    <h3 class="text-2xl font-bold text-red-700" id="modal-title">Inquire for Club Pricing on <span id="final-selection-name" class="text-gray-900">Product</span></h3>
+                    <h3 class="text-2xl font-bold text-gray-900" id="modal-title">Inquire for Club Pricing on <span id="final-selection-name" class="text-amber-600">Product</span></h3>
                     <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -175,15 +156,15 @@
                     <div id="form-fields" class="space-y-4">
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-red-600 focus:border-red-600 transition duration-150">
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-amber-500 focus:border-amber-500 transition duration-150">
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-red-600 focus:border-red-600 transition duration-150">
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-amber-500 focus:border-amber-500 transition duration-150">
                         </div>
                         <div>
                             <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-red-600 focus:border-red-600 transition duration-150">
+                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-amber-500 focus:border-amber-500 transition duration-150">
                         </div>
                     </div>
 
@@ -191,7 +172,7 @@
 
                     <div id="action-buttons" class="mt-6 flex justify-end">
                         <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-3 px-5 rounded-lg mr-3 hover:bg-gray-400 transition duration-150 font-medium">Cancel</button>
-                        <button type="submit" id="submit-button" class="bg-red-600 text-white py-3 px-6 rounded-lg font-bold hover:bg-red-700 transition duration-150 shadow-lg">Submit Inquiry</button>
+                        <button type="submit" id="submit-button" class="bg-amber-500 text-gray-900 py-3 px-6 rounded-lg font-bold hover:bg-amber-400 transition duration-150 shadow-lg">Submit Inquiry</button>
                     </div>
                 </form>
             </div>
@@ -208,25 +189,25 @@
 
 
     <!-- Fixed Mobile Bottom Navigation Bar (App Feel) -->
-    <footer class="fixed-nav fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-20 md:hidden">
-        <nav class="flex justify-around items-center h-16 text-gray-500 text-xs">
+    <footer class="fixed-nav fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-700 z-20 md:hidden">
+        <nav class="flex justify-around items-center h-16 text-gray-400 text-xs">
             <!-- Home -->
-            <a href="#" class="flex flex-col items-center p-1 text-red-600">
+            <a href="#" class="flex flex-col items-center p-1 text-amber-500">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span class="mt-1 font-semibold">Home</span>
             </a>
             <!-- Shop (Categories) -->
-            <a href="#categories" class="flex flex-col items-center p-1 hover:text-red-600">
+            <a href="#categories" class="flex flex-col items-center p-1 hover:text-amber-500">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M13 13.9c1.67-.5 3-2.02 3-3.9 0-2.21-1.79-4-4-4s-4 1.79-4 4c0 1.88 1.33 3.4 3 3.9v3.1h-2v2h6v-2h-2z"/></svg>
                 <span class="mt-1">Shop</span>
             </a>
             <!-- About -->
-            <a href="#about" class="flex flex-col items-center p-1 hover:text-red-600">
+            <a href="#about" class="flex flex-col items-center p-1 hover:text-amber-500">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                 <span class="mt-1">About</span>
             </a>
             <!-- Profile (Join Now) -->
-            <a href="#" class="flex flex-col items-center p-1 hover:text-red-600">
+            <a href="#" class="flex flex-col items-center p-1 hover:text-amber-500">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                 <span class="mt-1">Profile</span>
             </a>
@@ -234,12 +215,12 @@
     </footer>
 
     <!-- Desktop Footer (still present for large screens) -->
-    <footer class="bg-gray-800 text-gray-400 py-8 mt-12 border-t border-red-600 hidden md:block">
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-12 border-t border-amber-500 hidden md:block">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; 2024 Clubnow. The future of discounted appliances.</p>
             <div class="flex justify-center space-x-4 mt-3 text-sm text-gray-500">
-                <a href="#" class="hover:text-red-400">Privacy Policy</a>
-                <a href="#" class="hover:text-red-400">Terms of Clubbing</a>
+                <a href="#" class="hover:text-amber-400">Privacy Policy</a>
+                <a href="#" class="hover:text-amber-400">Terms of Clubbing</a>
             </div>
         </div>
     </footer>
@@ -371,10 +352,9 @@
             { name: "Vacuum Cleaners", image: "https://placehold.co/400x300/CA8A04/ffffff?text=Floor+Care", id: "VC", children: [
                 { name: "Robotic Vacuums", id: "RV", children: [
                     { name: "Lidar Mapping", id: "LM", children: [
-                        { name: "Auto-Empty Station", id: "AES", children: [
-                            { name: "Mop & Vacuum Combo", isFinal: true, id: "MVC" },
-                            { name: "Multi-Floor Memory", isFinal: true, id: "MFM" }
-                        ]}
+                        { name: "Auto-Empty Station", isFinal: true, id: "AES" },
+                        { name: "Mop & Vacuum Combo", isFinal: true, id: "MVC" },
+                        { name: "Multi-Floor Memory", isFinal: true, id: "MFM" }
                     ]}
                 ]},
                 { name: "Cordless Stick", id: "CS", children: [
@@ -456,177 +436,120 @@
                 ]}
             ]}
         ]; 
-        // State to track current navigation path
-        let currentPath = [];
+        // State to track the final product ID selected
         let finalProductId = null;
 
         /**
-         * Finds the current set of children based on the currentPath state.
-         * @returns {Array} The array of categories to display.
-         */
-        function getCurrentCategories() {
-            let current = categories;
-            for (const pathId of currentPath) {
-                const parent = current.find(c => c.id === pathId);
-                if (!parent || !parent.children) return [];
-                current = parent.children;
-            }
-            return current;
-        }
-
-        /**
-         * Renders the category list based on the current path.
+         * Renders the nested category list recursively.
          * @param {Array} list - The list of categories to render.
+         * @param {number} level - The current nesting level (0 for top-level).
+         * @param {string} parentId - The unique ID string of the parent container.
+         * @returns {string} The HTML string for the nested list.
          */
-        function renderCategories(list) {
-            const container = document.getElementById('category-list');
-            container.innerHTML = '';
-            
-            const currentLevel = currentPath.length;
-            const titleElement = document.querySelector('#categories h2');
-            
-            let titleText = "Choose a Product Category";
-            if (currentLevel === 1) titleText = "Select Type";
-            if (currentLevel === 2) titleText = "Select Capacity/Size";
-            if (currentLevel === 3) titleText = "Select Key Feature";
-            if (currentLevel >= 4) titleText = "Final Selection - Inquire for Best Club Price";
-            
-            titleElement.textContent = titleText;
+        function renderNestedCategories(list, level, parentId = 'root') {
+            if (!list || list.length === 0) return '';
 
-            if (list.length === 0) {
-                navigateToLevel(0);
-                return;
-            }
+            let html = '';
+            // Define styling based on nesting level
+            const levelClasses = [
+                'font-bold text-lg py-4 px-4 bg-gray-900 text-amber-500 rounded-t-xl', // Level 0: Main Category Header
+                'font-semibold text-base py-3 px-4', // Level 1: Main Type
+                'font-medium text-base py-3 px-4 pl-8', // Level 2: Capacity/Size
+                'font-normal text-sm py-3 px-4 pl-12', // Level 3: Key Feature
+                'font-light text-sm py-3 px-4 pl-16' // Level 4/5+: Final Options
+            ];
 
-            // Apply grid layout only for the first level (main categories)
-            if (currentLevel === 0) {
-                container.className = "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6";
-            } else {
-                // Use a simple column layout for list/dropdown view
-                container.className = "flex flex-col gap-2";
-            }
+            const textClasses = [
+                'text-amber-500', 
+                'text-gray-900', 
+                'text-gray-800', 
+                'text-gray-700', 
+                'text-gray-600'
+            ];
 
-
-            list.forEach(category => {
+            list.forEach((category, index) => {
                 const isFinal = category.isFinal;
-                const imageColor = ['F59E0B', '10B981', 'EF4444', '4F46E5'][currentPath.length % 4]; 
-                const image = category.image || `https://placehold.co/400x300/${imageColor}/000000?text=${category.name}`;
+                const hasChildren = category.children && category.children.length > 0;
                 
-                let itemHtml = '';
+                // Unique ID for the collapsible container
+                const collapseId = `${parentId}-${category.id}-${index}`;
+                
+                const currentLevelClass = levelClasses[Math.min(level, levelClasses.length - 1)];
+                const currentTextClass = textClasses[Math.min(level, textClasses.length - 1)];
 
-                if (currentLevel === 0) {
-                    // --- Grid Card View (Level 1) ---
-                    const actionClass = 'bg-red-600 text-white hover:bg-red-700 font-bold';
-                    const buttonText = 'Explore Sub-Categories';
-
-                    itemHtml = `
-                        <div class="category-grid-card group bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:border-red-600">
-                            <img src="${image}" onerror="this.src='https://placehold.co/400x300/3b82f6/ffffff?text=Image+Missing'" alt="${category.name}" class="w-full h-32 sm:h-48 object-cover rounded-t-xl transition duration-500 group-hover:opacity-80">
-                            <div class="p-4 sm:p-5">
-                                <h3 class="text-lg font-semibold mb-3 text-gray-800">${category.name}</h3>
-                                <button 
-                                    onclick="handleCategoryClick('${category.id}', ${isFinal})" 
-                                    class="w-full py-2 px-4 rounded-lg font-bold ${actionClass} transition duration-300 text-sm">
-                                    ${buttonText}
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    // --- List/Dropdown View (Levels 2+) ---
-                    const actionIndicator = isFinal ? 
-                        `<span class="text-sm font-semibold text-red-600">Inquire Now</span>` : 
-                        `<svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
-
-                    itemHtml = `
-                        <div class="category-list-item flex items-center justify-between p-4 border border-gray-200"
-                             onclick="handleCategoryClick('${category.id}', ${isFinal})">
-                            <h3 class="text-base font-medium ${isFinal ? 'text-red-700' : 'text-gray-800'}">
-                                ${category.name}
+                const bgColorClass = level === 0 ? 'bg-gray-900' : 'bg-white';
+                
+                // Main category item structure
+                html += `
+                    <div class="category-list-item overflow-hidden" 
+                         onclick="event.stopPropagation(); handleCategoryClick('${category.name}', '${category.id}', ${isFinal}, '${collapseId}')">
+                        
+                        <div class="flex items-center justify-between transition duration-150 ${currentLevelClass} ${currentTextClass} ${bgColorClass} ${!isFinal ? 'border-b border-gray-100' : ''} ${level === 0 ? 'shadow-md mt-4 first:mt-0' : 'hover:bg-gray-50'}"
+                             style="${level > 0 ? `padding-left: ${16 + level * 8}px;` : ''}"
+                             >
+                            
+                            <h3 class="flex items-center space-x-3 w-full">
+                                <span>${category.name}</span>
                             </h3>
-                            <div class="flex items-center space-x-2">
-                                ${actionIndicator}
+                            
+                            <div class="flex items-center space-x-2 flex-shrink-0">
+                                ${isFinal 
+                                    ? `<span class="text-sm font-bold text-amber-500 bg-amber-500/10 px-2 py-1 rounded-full">Inquire Now</span>` 
+                                    : hasChildren 
+                                        ? `<svg id="arrow-${collapseId}" class="w-5 h-5 text-gray-500 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`
+                                        : ''
+                                }
                             </div>
                         </div>
-                    `;
-                }
-
-                container.innerHTML += itemHtml;
+                        
+                        ${hasChildren ? `
+                            <!-- Collapsible Container for Children -->
+                            <div id="${collapseId}" class="hidden">
+                                ${renderNestedCategories(category.children, level + 1, collapseId)}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
             });
-            updateBreadcrumb();
+
+            return html;
         }
 
-        /**
-         * Updates the breadcrumb trail based on the currentPath state.
-         */
-        function updateBreadcrumb() {
-            const breadcrumb = document.getElementById('breadcrumb');
-            let html = `
-                <li class="flex items-center">
-                    <span class="font-medium text-gray-600 cursor-pointer hover:text-red-700 transition" onclick="navigateToLevel(0)">Home</span>
-                </li>
-            `;
-
-            let currentCategories = categories;
-            let currentPathNames = [];
-
-            for (let i = 0; i < currentPath.length; i++) {
-                const pathId = currentPath[i];
-                const category = currentCategories.find(c => c.id === pathId);
-                if (category) {
-                    currentPathNames.push(category.name);
-                    
-                    html += `
-                        <li class="flex items-center">
-                            <span class="mx-2 text-gray-400">/</span>
-                            <span class="font-medium ${i === currentPath.length - 1 ? 'text-red-700' : 'text-gray-600 cursor-pointer hover:text-red-700 transition'}" 
-                                onclick="navigateToLevel(${i + 1})">
-                                ${category.name}
-                            </span>
-                        </li>
-                    `;
-
-                    currentCategories = category.children;
-                }
-            }
-            breadcrumb.innerHTML = html;
-            
-            // On mobile, scroll breadcrumbs to the end
-            // This is necessary because of the overflow-x-auto class applied in the HTML
-            breadcrumb.scrollLeft = breadcrumb.scrollWidth;
-        }
 
         /**
-         * Handles the click on a category card.
+         * Handles the click on a category item, either expanding/collapsing or opening the modal.
+         * @param {string} name - The name of the clicked category.
          * @param {string} id - The ID of the clicked category.
          * @param {boolean} isFinal - True if this is a final option, triggering the modal.
+         * @param {string} collapseId - The ID of the nested div to collapse/expand.
          */
-        function handleCategoryClick(id, isFinal) {
+        function handleCategoryClick(name, id, isFinal, collapseId) {
             if (isFinal) {
-                // Find the name of the final product to display in the modal
-                const list = getCurrentCategories();
-                const finalProduct = list.find(c => c.id === id);
-                if (finalProduct) {
-                    document.getElementById('final-selection-name').textContent = finalProduct.name;
-                    finalProductId = finalProduct.id;
-                }
+                document.getElementById('final-selection-name').textContent = name;
+                finalProductId = id;
                 openModal();
             } else {
-                currentPath.push(id);
-                renderCategories(getCurrentCategories());
-                // Scroll to the categories section for better UX on mobile
-                document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
+                const collapseElement = document.getElementById(collapseId);
+                const arrowElement = document.getElementById(`arrow-${collapseId}`);
+
+                if (collapseElement && arrowElement) {
+                    // Check if it's currently hidden
+                    const isHidden = collapseElement.classList.contains('hidden');
+
+                    // Toggle visibility
+                    collapseElement.classList.toggle('hidden', !isHidden);
+                    
+                    // Toggle arrow rotation
+                    arrowElement.classList.toggle('rotate-90', isHidden);
+
+                    // Smoothly scroll to the clicked element if expanding (better mobile UX)
+                    if (isHidden) {
+                        collapseElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
             }
         }
 
-        /**
-         * Navigates back up the category tree to a specific level.
-         * @param {number} level - The target level (0 for home, 1 for level 1, etc.)
-         */
-        function navigateToLevel(level) {
-            currentPath = currentPath.slice(0, level);
-            renderCategories(getCurrentCategories());
-        }
 
         /**
          * Opens WhatsApp link with pre-filled message.
@@ -644,7 +567,7 @@
 
         const initialActionButtonsHtml = `
             <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-3 px-5 rounded-lg mr-3 hover:bg-gray-400 transition duration-150 font-medium">Cancel</button>
-            <button type="submit" id="submit-button" class="bg-red-600 text-white py-3 px-6 rounded-lg font-bold hover:bg-red-700 transition duration-150 shadow-lg">Submit Inquiry</button>
+            <button type="submit" id="submit-button" class="bg-amber-500 text-gray-900 py-3 px-6 rounded-lg font-bold hover:bg-amber-400 transition duration-150 shadow-lg">Submit Inquiry</button>
         `;
 
         function openModal() {
@@ -658,7 +581,7 @@
             content.classList.add('scale-100', 'opacity-100');
 
             // Reset UI state for form
-            document.getElementById('modal-title').innerHTML = `Inquire for Club Pricing on <span id="final-selection-name" class="text-gray-900">${document.getElementById('final-selection-name').textContent}</span>`;
+            document.getElementById('modal-title').innerHTML = `Inquire for Club Pricing on <span id="final-selection-name" class="text-amber-600">${document.getElementById('final-selection-name').textContent}</span>`;
             document.getElementById('modal-description').textContent = "Provide your contact details below. Once enough collective orders are met, our specialist will contact you with the final, maximized discount price.";
             document.getElementById('form-fields').classList.remove('hidden');
             document.getElementById('action-buttons').innerHTML = initialActionButtonsHtml;
@@ -699,10 +622,10 @@
                 clubnow_model_active: true
             };
 
-            // 1. Processing State (Blue)
+            // 1. Processing State (Dark Blue/Gray)
             messageDiv.textContent = 'Processing Club Order...';
-            messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-blue-500 block';
-            actionButtonsDiv.innerHTML = `<button type="button" disabled class="bg-red-400 text-white py-3 px-6 rounded-lg font-bold shadow-lg opacity-70">Submitting...</button>`;
+            messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-gray-700 block';
+            actionButtonsDiv.innerHTML = `<button type="button" disabled class="bg-amber-400 text-gray-900 py-3 px-6 rounded-lg font-bold shadow-lg opacity-70">Submitting...</button>`;
 
             console.log('--- Sample POST Request Payload ---');
             console.log(JSON.stringify(formData, null, 2));
@@ -726,7 +649,7 @@
                     const result = await response.json();
                     console.log('Sample API Response:', result);
 
-                    // 2. Success State & WhatsApp Confirmation Prompt
+                    // 2. Success State & WhatsApp Confirmation Prompt (Keep Green for Success Semantic)
                     document.getElementById('modal-title').textContent = 'Inquiry Submitted!';
                     document.getElementById('modal-description').textContent = 'Your club order is logged. For the fastest response and price confirmation, we recommend continuing the discussion on WhatsApp.';
                     document.getElementById('form-fields').classList.add('hidden');
@@ -748,7 +671,7 @@
                 }
             } catch (error) {
                 console.error('Submission failed:', error);
-                // 3. Error State (Red)
+                // 3. Error State (Red Semantic)
                 messageDiv.textContent = 'Error: Failed to process club order. Please check your connection and try again.';
                 messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-red-600 block';
                 actionButtonsDiv.innerHTML = initialActionButtonsHtml;
@@ -790,7 +713,9 @@
 
         // Initialize the app on page load
         window.onload = function() {
-            renderCategories(categories);
+            // Start the recursive rendering for the multi-level dropdown
+            const listContainer = document.getElementById('category-list');
+            listContainer.innerHTML = renderNestedCategories(categories, 0);
             initBanner();
         };
 
