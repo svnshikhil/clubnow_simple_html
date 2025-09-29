@@ -18,17 +18,30 @@
             padding-bottom: 4rem; /* Space for fixed bottom navigation */
             min-height: 100vh;
         }
-        /* Custom transitions for the category items */
-        .category-card {
+        /* Custom styles for grid view (Level 1) */
+        .category-grid-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            /* Light card background */
             background-color: #ffffff; 
         }
-        .category-card:hover {
-            transform: translateY(-6px);
+        .category-grid-card:hover {
+            transform: translateY(-4px);
             /* Red shadow on hover */
-            box-shadow: 0 15px 25px -5px rgba(220, 38, 38, 0.2), 0 6px 10px -2px rgba(220, 38, 38, 0.1); 
+            box-shadow: 0 10px 20px -3px rgba(220, 38, 38, 0.2), 0 4px 8px -1px rgba(220, 38, 38, 0.1); 
         }
+
+        /* Custom styles for list view (Levels 2+) */
+        .category-list-item {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+        .category-list-item:hover {
+            background-color: #fff5f5; /* Light red hover */
+            transform: translateY(-1px);
+        }
+
         .banner-item {
             transition: opacity 1s ease-in-out;
         }
@@ -137,8 +150,8 @@
                 </ol>
             </div>
 
-            <!-- Dynamic Category List - Adjusted columns for better mobile density -->
-            <div id="category-list" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <!-- Dynamic Category List Container (Changes presentation based on level) -->
+            <div id="category-list" class="gap-4 sm:gap-6">
                 <!-- Categories will be rendered here by JavaScript -->
             </div>
 
@@ -316,9 +329,7 @@
                 ]},
                 { name: "Solo", id: "SOLO", children: [
                     { name: "20 Litre", id: "20L", children: [
-                        { name: "Mechanical Control", id: "MC", children: [
-                            { name: "Basic Reheat Model", isFinal: true, id: "BRM" }
-                        ]}
+                        { name: "Mechanical Control", isFinal: true, id: "BRM" }
                     ]}
                 ]}
             ]},
@@ -471,7 +482,6 @@
             const container = document.getElementById('category-list');
             container.innerHTML = '';
             
-            // Check if we are at Level 5+ and the current list only contains final options
             const currentLevel = currentPath.length;
             const titleElement = document.querySelector('#categories h2');
             
@@ -483,43 +493,65 @@
             
             titleElement.textContent = titleText;
 
-
             if (list.length === 0) {
-                // If the list is empty, something is wrong, go back to the start.
                 navigateToLevel(0);
                 return;
             }
 
+            // Apply grid layout only for the first level (main categories)
+            if (currentLevel === 0) {
+                container.className = "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6";
+            } else {
+                // Use a simple column layout for list/dropdown view
+                container.className = "flex flex-col gap-2";
+            }
+
+
             list.forEach(category => {
                 const isFinal = category.isFinal;
-                // Use different placeholder colors for variety
                 const imageColor = ['F59E0B', '10B981', 'EF4444', '4F46E5'][currentPath.length % 4]; 
-                const image = category.image || `https://placehold.co/400x300/${imageColor}/000000?text=Level+${currentPath.length + 1}`;
+                const image = category.image || `https://placehold.co/400x300/${imageColor}/000000?text=${category.name}`;
                 
-                // Use RED for final inquiry button, light gray for others
-                const actionClass = isFinal ? 'bg-red-600 text-white hover:bg-red-700 font-bold' : 'bg-gray-200 text-gray-700 hover:bg-gray-300';
-                const buttonText = isFinal ? 'Inquire for Club Price' : 'Explore Sub-Categories';
+                let itemHtml = '';
 
-                // Render image only for Level 1 categories
-                const imageHtml = currentPath.length === 0 ? 
-                    `<img src="${image}" onerror="this.src='https://placehold.co/400x300/3b82f6/ffffff?text=Image+Missing'" alt="${category.name}" class="w-full h-48 object-cover rounded-t-xl transition duration-500 group-hover:opacity-80">` : '';
+                if (currentLevel === 0) {
+                    // --- Grid Card View (Level 1) ---
+                    const actionClass = 'bg-red-600 text-white hover:bg-red-700 font-bold';
+                    const buttonText = 'Explore Sub-Categories';
 
-                const cardHtml = `
-                    <div class="category-card group bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:border-red-600">
-                        ${imageHtml}
-                        <div class="p-4 sm:p-5"> <!-- Adjusted padding for mobile touch targets -->
-                            <h3 class="text-lg font-semibold mb-3 ${isFinal ? 'text-red-700' : 'text-gray-800'}">${category.name}</h3>
-                            <p class="text-xs text-gray-600 mb-4">${isFinal ? 'This final selection qualifies for Max Club Discount!' : `(${category.children ? category.children.length : 0} options)`}</p>
-                            
-                            <button 
-                                onclick="handleCategoryClick('${category.id}', ${isFinal})" 
-                                class="w-full py-2 px-4 rounded-lg font-bold ${actionClass} transition duration-300 text-sm"> <!-- Larger button for touch -->
-                                ${buttonText}
-                            </button>
+                    itemHtml = `
+                        <div class="category-grid-card group bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:border-red-600">
+                            <img src="${image}" onerror="this.src='https://placehold.co/400x300/3b82f6/ffffff?text=Image+Missing'" alt="${category.name}" class="w-full h-32 sm:h-48 object-cover rounded-t-xl transition duration-500 group-hover:opacity-80">
+                            <div class="p-4 sm:p-5">
+                                <h3 class="text-lg font-semibold mb-3 text-gray-800">${category.name}</h3>
+                                <button 
+                                    onclick="handleCategoryClick('${category.id}', ${isFinal})" 
+                                    class="w-full py-2 px-4 rounded-lg font-bold ${actionClass} transition duration-300 text-sm">
+                                    ${buttonText}
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                `;
-                container.innerHTML += cardHtml;
+                    `;
+                } else {
+                    // --- List/Dropdown View (Levels 2+) ---
+                    const actionIndicator = isFinal ? 
+                        `<span class="text-sm font-semibold text-red-600">Inquire Now</span>` : 
+                        `<svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
+
+                    itemHtml = `
+                        <div class="category-list-item flex items-center justify-between p-4 border border-gray-200"
+                             onclick="handleCategoryClick('${category.id}', ${isFinal})">
+                            <h3 class="text-base font-medium ${isFinal ? 'text-red-700' : 'text-gray-800'}">
+                                ${category.name}
+                            </h3>
+                            <div class="flex items-center space-x-2">
+                                ${actionIndicator}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML += itemHtml;
             });
             updateBreadcrumb();
         }
