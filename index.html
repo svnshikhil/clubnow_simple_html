@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appliances Hub | Ultra-Modern Home Tech</title>
+    <title>Clubnow | Ultra-Modern Home Tech</title>
     <!-- Use a modern, clean font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
@@ -19,12 +19,14 @@
             --radius-large: 12px;
         }
 
+        /* Base & Reset */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -113,7 +115,6 @@
             font-weight: 600;
         }
         
-        /* Overlay to click out */
         .menu-overlay {
             position: fixed;
             top: 0;
@@ -292,6 +293,22 @@
             flex-direction: column;
             cursor: pointer;
             position: relative;
+            
+            /* Enforce Fixed Card Size */
+            min-height: 400px;
+            
+            /* Initial state for animation */
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .product-card.fade-in {
+            /* Animation applied by JS */
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .product-card:hover {
@@ -301,7 +318,7 @@
 
         .product-image-container {
             width: 100%;
-            height: 200px;
+            height: 200px; /* Fixed height for image */
             overflow: hidden;
             border-bottom: 1px solid #f0f0f0;
         }
@@ -315,6 +332,9 @@
         .product-info {
             padding: 15px;
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .product-title {
@@ -360,7 +380,7 @@
             font-weight: 600;
             width: 100%;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: auto; /* Pushes button to the bottom */
             transition: background-color 0.2s;
         }
 
@@ -558,6 +578,58 @@
             margin-right: 8px;
         }
 
+        /* --- Static Content Pages (About, Story, Contact) --- */
+        .content-page {
+            padding: 60px 0;
+            min-height: 70vh;
+            background-color: var(--color-card);
+            margin-top: 30px;
+            border-radius: var(--radius-large);
+            box-shadow: var(--shadow-light);
+        }
+
+        .content-page h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .content-page p {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .contact-item {
+            padding: 20px;
+            border-radius: var(--radius-large);
+            background-color: var(--color-background);
+            box-shadow: var(--shadow-light);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+        }
+
+        .contact-item h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
         /* --- Desktop (Tablet and above) styles --- */
         @media (min-width: 768px) {
             .header-content {
@@ -624,6 +696,13 @@
             .footer-grid {
                 grid-template-columns: 2fr 1fr 1fr 2fr;
             }
+
+            .content-page h2 {
+                font-size: 3rem;
+            }
+            .content-page .container {
+                max-width: 900px;
+            }
         }
     </style>
 </head>
@@ -668,6 +747,7 @@
 
         /**
          * Core Function: Renders the product list based on current filters.
+         * Includes staggered fade-in animation on render.
          * @param {string} categoryId - The current active category ID.
          * @param {string} brandId - The current active brand ID.
          */
@@ -683,31 +763,42 @@
                 filteredProducts = filteredProducts.filter(p => p.brandId === brandId);
             }
 
-            productGrid.innerHTML = ''; // Clear existing products
+            // Clear products and remove the animation class from the grid (for re-filtering)
+            productGrid.innerHTML = ''; 
 
             if (filteredProducts.length === 0) {
                 productGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px; color: #555;">No products found for the current selection. Try a different filter!</p>';
                 return;
             }
 
-            filteredProducts.forEach(product => {
+            filteredProducts.forEach((product, index) => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
+                // Set animation delay for staggered effect
+                card.style.animationDelay = `${index * 0.05}s`; 
+                
                 card.innerHTML = `
                     <div class="product-image-container">
                         <img src="${product.image}" alt="${product.title}" class="product-image" onerror="this.onerror=null; this.src='https://placehold.co/400x300/3498DB/ffffff?text=Product+Image';" />
                     </div>
                     <div class="product-info">
-                        <p class="product-title">${product.title}</p>
-                        <div class="product-price-group">
-                            <span class="product-price">₹${product.price.toLocaleString('en-IN')}</span>
-                            <span class="product-old-price">₹${product.oldPrice.toLocaleString('en-IN')}</span>
-                            <span class="product-discount">${product.discount} OFF</span>
+                        <div>
+                            <p class="product-title">${product.title}</p>
+                            <div class="product-price-group">
+                                <span class="product-price">₹${product.price.toLocaleString('en-IN')}</span>
+                                <span class="product-old-price">₹${product.oldPrice.toLocaleString('en-IN')}</span>
+                                <span class="product-discount">${product.discount} OFF</span>
+                            </div>
                         </div>
                         <button class="add-to-club-btn" data-product-id="${product.id}">Add to Club</button>
                     </div>
                 `;
                 productGrid.appendChild(card);
+
+                // Add class to trigger the CSS animation after a tiny delay
+                setTimeout(() => {
+                    card.classList.add('fade-in');
+                }, 10);
             });
 
             // Re-attach listeners for the new "Add to Club" buttons
@@ -765,7 +856,7 @@
             // Limit to 4 visible categories + "See More" (5 total) on mobile view
             const visibleCategories = STORE_DATA.categories.slice(0, 4);
 
-            visibleCategories.forEach((category, index) => {
+            visibleCategories.forEach((category) => {
                 const item = document.createElement('div');
                 item.className = 'category-item';
                 item.setAttribute('data-category-id', category.id);
@@ -789,9 +880,8 @@
                 <span class="category-name">See More</span>
             `;
             seeMore.addEventListener('click', () => {
-                // For a simple single page, we can just show all products/brands.
+                // When "See More" is clicked, show all categories' products/brands.
                 handleCategoryClick(null);
-                document.getElementById('product-list-container').scrollIntoView({ behavior: 'smooth' });
             });
             categoriesContainer.appendChild(seeMore);
         }
@@ -801,8 +891,7 @@
          * @param {string} categoryId - ID of the clicked category.
          */
         function handleCategoryClick(categoryId) {
-            // Reset brand filter when category changes
-            currentBrandId = null;
+            currentBrandId = null; // Reset brand filter
             currentCategoryId = categoryId;
 
             // Update active state for category items
@@ -818,7 +907,7 @@
             renderProducts(categoryId, null);
             
             // Scroll to the product list
-            document.getElementById('product-list-container').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
         }
 
         /**
@@ -840,7 +929,7 @@
             renderProducts(currentCategoryId, brandId);
             
             // Scroll to the product list
-            document.getElementById('product-list-container').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
         }
 
         /**
@@ -894,6 +983,9 @@
             
             const dummyEndpoint = 'https://jsonplaceholder.typicode.com/posts'; // Dummy endpoint
             try {
+                // Simulate network delay for a realistic feel
+                await new Promise(resolve => setTimeout(resolve, 500)); 
+                
                 const response = await fetch(dummyEndpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -917,11 +1009,11 @@
 
                 } else {
                     console.error('Submission failed:', response.status);
-                    alert('Submission failed. Please try again.'); // Using internal console error, not window.alert
+                    console.error('Submission failed. Please try again.');
                 }
             } catch (error) {
                 console.error('Network Error:', error);
-                alert('An error occurred. Please check your connection.'); // Using internal console error, not window.alert
+                console.error('An error occurred. Please check your connection.');
             }
         }
         
@@ -984,14 +1076,15 @@
     <header>
         <div class="container header-content">
             <div class="logo">
-                <img src="https://placehold.co/100x30/0077CC/ffffff?text=APPLIANCE+HUB" alt="Store Logo">
+                <img src="https://placehold.co/100x30/0077CC/ffffff?text=CLUBNOW" alt="Clubnow Store Logo">
             </div>
             <!-- Collapsible Navigation (Side Menu on Mobile) -->
             <nav id="side-menu" class="side-menu">
                 <a href="#home">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#products">Shop</a>
-                <a href="#contact">Contact Us</a>
+                <a href="#products">Products</a>
+                <a href="#about-us-section">About Us</a>
+                <a href="#our-story-section">Our Story</a>
+                <a href="#contact-us-section">Contact Us</a>
             </nav>
             <!-- Hamburger Icon (Mobile) -->
             <div id="hamburger-menu" class="hamburger-menu">
@@ -1029,7 +1122,7 @@
         <section class="intro-text">
             <div class="container">
                 <h1>Crafting Your Perfect Home Environment</h1>
-                <p>Welcome to Appliance Hub, your premier destination for the world's most innovative, energy-efficient, and beautifully designed home technology. We meticulously curate a selection of appliances that blend ultra-realistic performance with modern, minimalist aesthetics, ensuring your home functions flawlessly and looks stunning. Join our exclusive club to unlock price advantages today.</p>
+                <p>Welcome to **Clubnow**, your premier destination for the world's most innovative, energy-efficient, and beautifully designed home technology. We meticulously curate a selection of appliances that blend ultra-realistic performance with modern, minimalist aesthetics, ensuring your home functions flawlessly and looks stunning. Join our exclusive club to unlock price advantages today.</p>
             </div>
         </section>
 
@@ -1062,6 +1155,54 @@
                 </div>
             </div>
         </section>
+
+        <!-- About Us Section -->
+        <section id="about-us-section" class="content-page">
+            <div class="container">
+                <h2>About Clubnow</h2>
+                <p>Clubnow was founded on the principle that modern living demands both **excellence in performance** and **elegant design**. We are not just an appliance retailer; we are curators of future-proof homes. We rigorously select products that adhere to the highest standards of energy efficiency, sustainability, and technological innovation.</p>
+                <p>Our unique Club model provides exclusive pricing to registered members, ensuring you get premium technology without the premium markup. We partner directly with leading global manufacturers to streamline the supply chain and pass those savings directly to you. Our commitment is simple: **elevated living, accessible to everyone.**</p>
+                <p>We are a customer-centric team operating from the heart of the tech revolution, dedicated to supporting your journey to a smarter, more beautiful home.</p>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section id="our-story-section" class="content-page" style="background-color: var(--color-background);">
+            <div class="container">
+                <h2>Our Story: From Concept to Club</h2>
+                <p>The journey of Clubnow began in 2021 when our founder, an appliance engineer, noticed a significant gap in the market: consumers had to choose between cutting-edge, expensive appliances and affordable, outdated ones. The idea of an "**Appliance Club**" was born—a model designed to democratize high-end home technology.</p>
+                <p>We spent a year establishing direct relationships with key manufacturers and building a lean, digital-first operation. By focusing on efficiency and membership, we successfully launched Clubnow, immediately disrupting the traditional retail model. Every appliance you see today has a story of innovation, quality, and rigorous testing behind it, reflecting our dedication to not just selling products, but enabling better lifestyles.</p>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact-us-section" class="content-page">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>We're here to help you with club inquiries, technical support, and partnership questions. Reach out to the relevant department below, or use the floating WhatsApp button for the fastest service.</p>
+                <div class="contact-info-grid">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <h4>Sales & Club Inquiries</h4>
+                        <a href="tel:+919876543210" style="color: var(--color-secondary);">+91 987 654 3210</a>
+                        <p style="font-size: 0.8rem; margin-top: 5px;">(Mon - Sat, 9am - 6pm)</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <h4>Customer Support</h4>
+                        <a href="mailto:support@clubnow.com" style="color: var(--color-secondary);">support@clubnow.com</a>
+                        <p style="font-size: 0.8rem; margin-top: 5px;">(Avg. response time: 4 hours)</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <h4>Corporate Office</h4>
+                        <p style="color: #444;">123 Innovation Tower, Tech Park, Cityville, 400001</p>
+                        <p style="font-size: 0.8rem; margin-top: 5px;">(Visits by appointment only)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Floating WhatsApp Button -->
@@ -1072,19 +1213,19 @@
     </a>
 
     <!-- Footer -->
-    <footer id="contact">
+    <footer id="main-footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4>About Appliance Hub</h4>
+                    <h4>About Clubnow</h4>
                     <p style="font-size: 0.9rem; color: #ccc;">We are dedicated to providing only the best-in-class, energy-efficient, and aesthetically pleasing home appliances globally. Innovation meets value in every product we offer.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <a href="#home">Home</a>
-                    <a href="#about">About Us</a>
+                    <a href="#about-us-section">About Us</a>
                     <a href="#products">Product Catalog</a>
-                    <a href="#contact">Contact Support</a>
+                    <a href="#contact-us-section">Contact Support</a>
                 </div>
                 <div class="footer-section">
                     <h4>Support</h4>
@@ -1103,7 +1244,7 @@
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2025 Appliance Hub. All rights reserved.
+                &copy; 2025 Clubnow. All rights reserved.
             </div>
         </div>
     </footer>
