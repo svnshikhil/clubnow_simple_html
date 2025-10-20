@@ -587,6 +587,15 @@
             border-radius: var(--radius-large);
             box-shadow: var(--shadow-light);
         }
+        
+        /* New styles to manage page switching logic via JS */
+        .nav-page {
+            display: none; /* Hidden by default */
+        }
+        .nav-page.active {
+            display: block; /* Shown when active hash matches */
+        }
+
 
         .content-page h2 {
             font-size: 2.2rem;
@@ -739,7 +748,7 @@
                 { id: 7, categoryId: 'cat-ref', brandId: 'br-hitachi', title: 'Hitachi 300L Bottom Freezer Refrigerator', price: 35500, oldPrice: 40000, discount: '11%', image: 'https://placehold.co/400x300/A0A0A0/333333?text=Hitachi+Ref' },
                 { id: 8, categoryId: 'cat-wm', brandId: 'br-pana', title: 'Panasonic Top Load Washer Dryer', price: 25000, oldPrice: 30000, discount: '16%', image: 'https://placehold.co/400x300/C0C0C0/333333?text=Top+Load+WM' },
             ],
-            whatsappNumber: '919876543210' // Dummy number
+            whatsappNumber: '918714990266' // Dummy number
         };
 
         let currentCategoryId = null;
@@ -1018,6 +1027,53 @@
         }
         
         /**
+         * Toggles visibility of sections based on URL hash.
+         */
+        function handleNavigation() {
+            // Default to '#home' if no hash is present
+            const hash = window.location.hash || '#home';
+            const commerceWrapper = document.getElementById('commerce-content-wrapper');
+            const staticPages = document.querySelectorAll('.nav-page');
+            
+            // 1. Hide all static pages (About, Story, Contact)
+            staticPages.forEach(page => page.classList.remove('active'));
+
+            if (hash === '#home' || hash === '#products' || hash === '#categories' || hash === '#brands') {
+                // 2. If a commerce link is clicked: SHOW commerce sections
+                commerceWrapper.style.display = 'block';
+                
+                // Scroll to the specific commerce section (if not just #home)
+                if (hash !== '#home') {
+                    // Use setTimeout to ensure the scroll happens after the content is displayed
+                    setTimeout(() => {
+                        const target = document.querySelector(hash);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 0);
+                } else {
+                    // For #home, scroll to the very top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+            } else if (hash === '#about-us-section' || hash === '#our-story-section' || hash === '#contact-us-section') {
+                // 3. If a static page link is clicked: HIDE commerce sections and SHOW the active static page
+                commerceWrapper.style.display = 'none';
+                const activePage = document.querySelector(hash);
+                if (activePage) {
+                    activePage.classList.add('active');
+                }
+                // Scroll to the top of the new page content
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } else {
+                // Default view (show commerce)
+                commerceWrapper.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        /**
          * Initialize all elements and listeners on page load.
          */
         window.onload = function() {
@@ -1026,6 +1082,11 @@
             renderBrands(null); // Show all brands initially
             renderProducts(null, null); // Show all products initially
 
+            // --- NAVIGATION SETUP ---
+            // Set initial page view based on hash and listen for changes
+            handleNavigation();
+            window.addEventListener('hashchange', handleNavigation);
+            
             // --- Menu Toggle ---
             const hamburger = document.getElementById('hamburger-menu');
             const sideMenu = document.getElementById('side-menu');
@@ -1041,7 +1102,11 @@
             
             // Close menu on link click (mobile)
             sideMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', toggleMenu);
+                link.addEventListener('click', () => {
+                    toggleMenu();
+                    // Ensure navigation is handled immediately after menu closes
+                    handleNavigation();
+                });
             });
 
             // --- Form Submission Listener ---
@@ -1094,70 +1159,74 @@
     </header>
 
     <main>
-        <!-- Banner Slider Section -->
-        <section id="home" class="banner-slider">
-            <div id="slides-wrapper" class="slides-wrapper">
-                <div class="slide">
-                    <div class="slide-content">
-                        <h2>The Future of Home Appliances is Here.</h2>
-                        <p>Experience ultra-realistic performance and stunning design.</p>
+        <!-- Wrapper for all commerce-related content -->
+        <div id="commerce-content-wrapper">
+            <!-- Banner Slider Section -->
+            <section id="home" class="banner-slider">
+                <div id="slides-wrapper" class="slides-wrapper">
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h2>The Future of Home Appliances is Here.</h2>
+                            <p>Experience ultra-realistic performance and stunning design.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h2>Limited Time Club Pricing!</h2>
+                            <p>Unlock exclusive deals on premium brands. Inquire now.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h2>5-Star Energy Rated Products.</h2>
+                            <p>Save money and the planet with our certified collection.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="slide">
-                    <div class="slide-content">
-                        <h2>Limited Time Club Pricing!</h2>
-                        <p>Unlock exclusive deals on premium brands. Inquire now.</p>
+            </section>
+
+            <!-- Intro Text Section -->
+            <section class="intro-text">
+                <div class="container">
+                    <h1>Crafting Your Perfect Home Environment</h1>
+                    <p>Welcome to **Clubnow**, your premier destination for the world's most innovative, energy-efficient, and beautifully designed home technology. We meticulously curate a selection of appliances that blend ultra-realistic performance with modern, minimalist aesthetics, ensuring your home functions flawlessly and looks stunning. Join our exclusive club to unlock price advantages today.</p>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section id="categories">
+                <div class="container">
+                    <h2 class="grid-header">Shop by Category</h2>
+                    <div id="category-grid" class="category-grid">
+                        <!-- Categories rendered by JS -->
                     </div>
                 </div>
-                <div class="slide">
-                    <div class="slide-content">
-                        <h2>5-Star Energy Rated Products.</h2>
-                        <p>Save money and the planet with our certified collection.</p>
+            </section>
+
+            <!-- Shop by Brand Section -->
+            <section id="brands">
+                <div class="container">
+                    <h2 class="grid-header">Shop by Brand</h2>
+                    <div id="brand-grid" class="brand-grid">
+                        <!-- Brands rendered by JS -->
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Intro Text Section -->
-        <section class="intro-text">
-            <div class="container">
-                <h1>Crafting Your Perfect Home Environment</h1>
-                <p>Welcome to **Clubnow**, your premier destination for the world's most innovative, energy-efficient, and beautifully designed home technology. We meticulously curate a selection of appliances that blend ultra-realistic performance with modern, minimalist aesthetics, ensuring your home functions flawlessly and looks stunning. Join our exclusive club to unlock price advantages today.</p>
-            </div>
-        </section>
-
-        <!-- Categories Section -->
-        <section id="categories">
-            <div class="container">
-                <h2 class="grid-header">Shop by Category</h2>
-                <div id="category-grid" class="category-grid">
-                    <!-- Categories rendered by JS -->
+            <!-- Product List Section -->
+            <section id="products" class="products-section">
+                <div class="container">
+                    <h2 id="product-list-container">Featured Products</h2>
+                    <div id="product-grid" class="product-grid">
+                        <!-- Products rendered by JS -->
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
+        <!-- End of commerce-content-wrapper -->
 
-        <!-- Shop by Brand Section -->
-        <section id="brands">
-            <div class="container">
-                <h2 class="grid-header">Shop by Brand</h2>
-                <div id="brand-grid" class="brand-grid">
-                    <!-- Brands rendered by JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Product List Section -->
-        <section id="products" class="products-section">
-            <div class="container">
-                <h2 id="product-list-container">Featured Products</h2>
-                <div id="product-grid" class="product-grid">
-                    <!-- Products rendered by JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- About Us Section -->
-        <section id="about-us-section" class="content-page">
+        <!-- About Us Section (Static Page) -->
+        <section id="about-us-section" class="content-page nav-page">
             <div class="container">
                 <h2>About Clubnow</h2>
                 <p>Clubnow was founded on the principle that modern living demands both **excellence in performance** and **elegant design**. We are not just an appliance retailer; we are curators of future-proof homes. We rigorously select products that adhere to the highest standards of energy efficiency, sustainability, and technological innovation.</p>
@@ -1166,8 +1235,8 @@
             </div>
         </section>
 
-        <!-- Our Story Section -->
-        <section id="our-story-section" class="content-page" style="background-color: var(--color-background);">
+        <!-- Our Story Section (Static Page) -->
+        <section id="our-story-section" class="content-page nav-page" style="background-color: var(--color-background);">
             <div class="container">
                 <h2>Our Story: From Concept to Club</h2>
                 <p>The journey of Clubnow began in 2021 when our founder, an appliance engineer, noticed a significant gap in the market: consumers had to choose between cutting-edge, expensive appliances and affordable, outdated ones. The idea of an "**Appliance Club**" was born—a model designed to democratize high-end home technology.</p>
@@ -1175,8 +1244,8 @@
             </div>
         </section>
 
-        <!-- Contact Us Section -->
-        <section id="contact-us-section" class="content-page">
+        <!-- Contact Us Section (Static Page) -->
+        <section id="contact-us-section" class="content-page nav-page">
             <div class="container">
                 <h2>Contact Us</h2>
                 <p>We're here to help you with club inquiries, technical support, and partnership questions. Reach out to the relevant department below, or use the floating WhatsApp button for the fastest service.</p>
@@ -1184,7 +1253,7 @@
                     <div class="contact-item">
                         <i class="fa-solid fa-phone"></i>
                         <h4>Sales & Club Inquiries</h4>
-                        <a href="tel:+919876543210" style="color: var(--color-secondary);">+91 987 654 3210</a>
+                        <a href="tel:+918714990266" style="color: var(--color-secondary);">+91 871 4990 266</a>
                         <p style="font-size: 0.8rem; margin-top: 5px;">(Mon - Sat, 9am - 6pm)</p>
                     </div>
                     <div class="contact-item">
@@ -1206,7 +1275,7 @@
     </main>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
+    <a href="https://wa.me/918714990266" target="_blank" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
         <div class="whatsapp-btn">
             <i class="fa-brands fa-whatsapp"></i>
         </div>
