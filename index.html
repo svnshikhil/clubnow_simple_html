@@ -3,738 +3,861 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clubnow - Max Discount Home Appliances</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Use Inter font -->
+    <title>ClubNow - Premium Home Appliances</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f7f7; /* Light background */
-            background-image: none;
-            /* Mobile App Feel: Use padding to clear fixed top/bottom bars */
-            padding-top: 5rem; /* Space for fixed top header */
-            padding-bottom: 4rem; /* Space for fixed bottom navigation */
-            min-height: 100vh;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        /* Custom styles for the list view */
-        .category-list-item {
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f8f9fa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .cart-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Banner Slider */
+        .banner-slider {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .banner-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .banner-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .banner-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102,126,234,0.8), rgba(118,75,162,0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px;
+            color: white;
+        }
+
+        .banner-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .banner-subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: white;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Categories */
+        .section {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .categories {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+
+        .categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            min-width: 80px;
             cursor: pointer;
         }
-        /* List item hover effect (Light Yellow) */
-        .category-list-item > div:first-child {
-            transition: background-color 0.2s ease, transform 0.1s ease;
-        }
-        .category-list-item > div:first-child:hover {
-            background-color: #fefce8; /* Very light yellow hover */
-            transform: translateY(-1px);
+
+        .category-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .banner-item {
-            transition: opacity 1s ease-in-out;
+        .category-item:hover .category-circle {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
         }
 
-        /* Ensure fixed elements are above content */
-        .fixed-header {
-            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
-            border-bottom: 2px solid #fcd34d; /* Yellow border line */
-        }
-        .fixed-nav {
-            box-shadow: 0 -2px 4px -1px rgba(0, 0, 0, 0.1);
+        .category-name {
+            font-size: 12px;
+            text-align: center;
+            font-weight: 500;
+            color: #4a4a4a;
         }
 
-        /* Adjustments for Mobile Viewports */
-        @media (max-width: 768px) {
-            #category-list {
-                padding-bottom: 2rem; 
+        /* Brand Tiles */
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .brand-tile {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+        }
+
+        .brand-tile:hover, .brand-tile.active {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.2);
+            border-color: #667eea;
+        }
+
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        /* Products */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-brand {
+            font-size: 11px;
+            color: #667eea;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 5px 0;
+            color: #1a1a1a;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #667eea;
+            margin: 8px 0;
+        }
+
+        .add-to-club-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-to-club-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a4a4a;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checkbox-group input {
+            margin-top: 3px;
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: #4a4a4a;
+            line-height: 1.4;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            color: white;
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .success-text {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+        }
+
+        @media (min-width: 768px) {
+            .banner-slider {
+                height: 300px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+
+            .product-image {
+                height: 220px;
+            }
+
+            .brand-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- Fixed Mobile Header (White Background) -->
-    <header class="fixed-header fixed top-0 left-0 right-0 bg-white text-gray-900 z-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-extrabold text-yellow-600">Clubnow App</h1>
-            <!-- Menu/Settings Icon for Mobile (Placeholder for functionality) -->
-            <button class="text-yellow-600 hover:text-yellow-500 p-2 rounded-full">
-                <!-- Settings Icon -->
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-            <!-- Desktop Navigation (Hidden on Mobile) -->
-            <nav class="hidden md:flex space-x-8 text-gray-700">
-                <a href="#" class="hover:text-yellow-600 transition duration-150">Home</a>
-                <a href="#categories" class="hover:text-yellow-600 transition duration-150">Max Discount Shop</a>
-                <a href="#about" class="hover:text-yellow-600 transition duration-150">How It Works</a>
-                <a href="#" class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition duration-150 shadow-md">Join Now</a>
-            </nav>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🏠</div>
+                <span>ClubNow</span>
+            </div>
+            <div class="cart-icon">
+                🛒
+                <span class="cart-badge" id="clubCount">0</span>
+            </div>
         </div>
     </header>
 
-    <!-- Full-Width Auto-Changing Banner -->
-    <section class="w-full relative h-64 sm:h-80 overflow-hidden">
-        <div id="banner-container" class="h-full">
-            <!-- Banner Item 1: Clubbing Model Focus (using yellow/dark text for contrast) -->
-            <div class="banner-item absolute inset-0 bg-cover bg-center opacity-100" style="background-image: url('https://placehold.co/1920x400/fef08a/1f2937?text=Club+Orders+for+Maximum+Savings');">
-                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
-                    <div class="text-center">
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-2 shadow-text">Max Discount Achieved</h2>
-                        <p class="text-md sm:text-lg text-yellow-300 hidden sm:block">Our unique system clubs orders to get you the lowest price.</p>
-                        <button class="mt-4 bg-yellow-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-yellow-600 transition duration-300 text-sm">Start Saving Today</button>
-                    </div>
+    <!-- Banner Slider 1 -->
+    <div class="banner-slider" id="banner1">
+        <div class="banner-track">
+            <div class="banner-slide">
+                <div class="banner-overlay">
+                    <div class="banner-title">Big Festival Sale!</div>
+                    <div class="banner-subtitle">Up to 60% off on all appliances</div>
                 </div>
             </div>
-            <!-- Banner Item 2: Premium Products (using yellow/dark text for contrast) -->
-            <div class="banner-item absolute inset-0 bg-cover bg-center opacity-0" style="background-image: url('https://placehold.co/1920x400/d9f991/1f2937?text=Premium+Appliances+Secured');">
-                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4">
-                    <div class="text-center">
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-2 shadow-text">Guaranteed Lowest Price</h2>
-                        <p class="text-md sm:text-lg text-yellow-300 hidden sm:block">Access top-tier electronics from leading global vendors.</p>
-                        <button class="mt-4 bg-yellow-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-yellow-600 transition duration-300 text-sm">Explore Categories</button>
-                    </div>
+            <div class="banner-slide">
+                <div class="banner-overlay">
+                    <div class="banner-title">New Arrivals</div>
+                    <div class="banner-subtitle">Latest smart home appliances</div>
+                </div>
+            </div>
+            <div class="banner-slide">
+                <div class="banner-overlay">
+                    <div class="banner-title">Premium Brands</div>
+                    <div class="banner-subtitle">Shop from top manufacturers</div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Introductory Content Section -->
-    <section id="about" class="py-8 sm:py-12 bg-white text-gray-900 border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">How Clubnow Works</h2>
-            <p class="text-sm text-gray-600 mb-6 max-w-4xl mx-auto">
-                We intelligently **club orders from different people**, creating massive bulk purchasing power to secure the **maximum possible discount**.
-            </p>
-
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-                <div class="p-4 bg-yellow-50 rounded-xl shadow-md border border-yellow-200">
-                    <div class="text-2xl text-yellow-600 mb-1">🤝</div>
-                    <h3 class="text-lg font-semibold mb-1 text-gray-900">Collective Ordering</h3>
-                </div>
-                <div class="p-4 bg-yellow-50 rounded-xl shadow-md border border-yellow-200">
-                    <div class="text-2xl text-yellow-600 mb-1">💰</div>
-                    <h3 class="text-lg font-semibold mb-1 text-gray-900">Max Discounts</h3>
-                </div>
-                <div class="p-4 bg-yellow-50 rounded-xl shadow-md border border-yellow-200">
-                    <div class="text-2xl text-yellow-600 mb-1">🚀</div>
-                    <h3 class="text-lg font-semibold mb-1 text-gray-900">Premium Appliances</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Category Explorer Section -->
-    <section id="categories" class="py-8 bg-gray-50 flex-grow">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-xl font-bold text-gray-900 mb-4 text-center">Select Your Product Configuration</h2>
-
-            <!-- Dynamic Category List Container (Collapsible List View) -->
-            <div id="category-list" class="flex flex-col gap-1 rounded-xl overflow-hidden shadow-lg border border-gray-200">
-                <!-- Categories will be rendered here by JavaScript -->
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Contact Modal (Hidden by default) -->
-    <div id="contact-modal" class="fixed inset-0 z-50 bg-black bg-opacity-80 hidden transition duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div id="modal-content" class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg transform transition-all duration-300 scale-95 opacity-0 border border-yellow-500/50">
-                <div class="flex justify-between items-start mb-4">
-                    <h3 class="text-2xl font-bold text-gray-900" id="modal-title">Inquire for Club Pricing on <span id="final-selection-name" class="text-yellow-600">Product</span></h3>
-                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
-                </div>
-
-                <p class="text-sm text-gray-600 mb-6" id="modal-description">Provide your contact details below. Once enough collective orders are met, our specialist will contact you with the final, maximized discount price.</p>
-
-                <form id="contact-form" onsubmit="handleFormSubmit(event)">
-                    <div id="form-fields" class="space-y-4">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 transition duration-150">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 transition duration-150">
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 transition duration-150">
-                        </div>
-                    </div>
-
-                    <div id="submission-message" class="mt-4 text-center p-3 rounded-lg text-white font-medium hidden"></div>
-
-                    <div id="action-buttons" class="mt-6 flex justify-end">
-                        <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-3 px-5 rounded-lg mr-3 hover:bg-gray-400 transition duration-150 font-medium">Cancel</button>
-                        <button type="submit" id="submit-button" class="bg-yellow-500 text-gray-900 py-3 px-6 rounded-lg font-bold hover:bg-yellow-600 transition duration-150 shadow-lg">Submit Inquiry</button>
-                    </div>
-                </form>
-            </div>
+        <div class="slider-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
     </div>
 
-    <!-- Floating WhatsApp Button -->
-    <button onclick="sendWhatsAppMessage()" class="fixed bottom-16 right-4 p-4 rounded-full bg-green-500 text-white shadow-xl hover:bg-green-600 transition duration-300 z-50">
-        <!-- WhatsApp Icon (Inline SVG for compliance) -->
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12c0 3.31 1.6 6.3 4.07 8.16l-1.33 4.88 4.88-1.33C9.7 22.4 11.8 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.17 14.59c-.06-.03-.4-.15-.75-.3-.35-.15-.6-.2-.84.25-.24.45-.48.48-.8.43-.32-.06-1.15-.43-2.19-1.32-1.04-.89-1.74-1.95-1.94-2.29-.2-.33 0-.51.15-.66.14-.14.31-.2.4-.28.08-.08.15-.17.25-.29.1-.12.14-.2.2-.33.06-.13 0-.25-.13-.51-.13-.25-.97-2.31-1.33-3.17-.36-.85-.73-.75-1.02-.77-.28-.02-.6-.02-.92-.02-.32 0-.84.12-1.28.6-.44.47-1.68 1.63-1.68 4.05 0 2.42 1.73 4.86 1.97 5.17.24.31 3.39 5.2 8.08 6.55 4.69 1.35 4.69.9 5.53.84.84-.06 2.05-.83 2.34-1.67.29-.83.29-.83.2-.99-.09-.15-.35-.24-.7-.41z"/>
-        </svg>
-    </button>
-
-
-    <!-- Fixed Mobile Bottom Navigation Bar (App Feel - White Background) -->
-    <footer class="fixed-nav fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-20 md:hidden">
-        <nav class="flex justify-around items-center h-16 text-gray-500 text-xs">
-            <!-- Home -->
-            <a href="#" class="flex flex-col items-center p-1 text-yellow-600">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                <span class="mt-1 font-semibold">Home</span>
-            </a>
-            <!-- Shop (Categories) -->
-            <a href="#categories" class="flex flex-col items-center p-1 hover:text-yellow-600">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M13 13.9c1.67-.5 3-2.02 3-3.9 0-2.21-1.79-4-4-4s-4 1.79-4 4c0 1.88 1.33 3.4 3 3.9v3.1h-2v2h6v-2h-2z"/></svg>
-                <span class="mt-1">Shop</span>
-            </a>
-            <!-- About -->
-            <a href="#about" class="flex flex-col items-center p-1 hover:text-yellow-600">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                <span class="mt-1">About</span>
-            </a>
-            <!-- Profile (Join Now) -->
-            <a href="#" class="flex flex-col items-center p-1 hover:text-yellow-600">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                <span class="mt-1">Profile</span>
-            </a>
-        </nav>
-    </footer>
-
-    <!-- Desktop Footer (still present for large screens - White Background) -->
-    <footer class="bg-white text-gray-600 py-8 mt-12 border-t border-gray-200 hidden md:block">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2024 Clubnow. The future of discounted appliances.</p>
-            <div class="flex justify-center space-x-4 mt-3 text-sm text-gray-500">
-                <a href="#" class="hover:text-yellow-600">Privacy Policy</a>
-                <a href="#" class="hover:text-yellow-600">Terms of Clubbing</a>
+    <!-- Categories -->
+    <section class="section">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="categories" id="categories">
+            <div class="category-item">
+                <div class="category-circle">📺</div>
+                <div class="category-name">TV</div>
+            </div>
+            <div class="category-item">
+                <div class="category-circle">❄️</div>
+                <div class="category-name">AC</div>
+            </div>
+            <div class="category-item">
+                <div class="category-circle">🧊</div>
+                <div class="category-name">Refrigerator</div>
+            </div>
+            <div class="category-item">
+                <div class="category-circle">🌀</div>
+                <div class="category-name">Washing Machine</div>
+            </div>
+            <div class="category-item" id="seeMoreCategory">
+                <div class="category-circle">➕</div>
+                <div class="category-name">See More</div>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Banner Slider 2 -->
+    <div class="banner-slider" id="banner2" style="margin-top: 10px;">
+        <div class="banner-track">
+            <div class="banner-slide">
+                <div class="banner-overlay">
+                    <div class="banner-title">Free Installation</div>
+                    <div class="banner-subtitle">On all major appliances</div>
+                </div>
+            </div>
+            <div class="banner-slide">
+                <div class="banner-overlay">
+                    <div class="banner-title">Extended Warranty</div>
+                    <div class="banner-subtitle">3 years protection plan</div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <!-- Shop by Brand -->
+    <section class="section">
+        <h2 class="section-title">Shop by Brand</h2>
+        <div class="brand-grid">
+            <div class="brand-tile" data-brand="Samsung">
+                <div class="brand-logo">Samsung</div>
+            </div>
+            <div class="brand-tile" data-brand="LG">
+                <div class="brand-logo">LG</div>
+            </div>
+            <div class="brand-tile" data-brand="Sony">
+                <div class="brand-logo">Sony</div>
+            </div>
+            <div class="brand-tile" data-brand="Whirlpool">
+                <div class="brand-logo">Whirlpool</div>
+            </div>
+            <div class="brand-tile" data-brand="Panasonic">
+                <div class="brand-logo">Panasonic</div>
+            </div>
+            <div class="brand-tile" data-brand="Bosch">
+                <div class="brand-logo">Bosch</div>
+            </div>
+            <div class="brand-tile" data-brand="Haier">
+                <div class="brand-logo">Haier</div>
+            </div>
+            <div class="brand-tile" data-brand="Godrej">
+                <div class="brand-logo">Godrej</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content" id="modalContent">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <h2 class="modal-title">Join ClubNow</h2>
+            <form id="clubForm">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" id="phone" required pattern="[0-9]{10}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Pin Code</label>
+                    <input type="text" class="form-input" id="pincode" required pattern="[0-9]{6}">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" required>
+                        <label class="checkbox-label" for="terms">I accept the terms and conditions and privacy policy</label>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Join Club</button>
+            </form>
+        </div>
+    </div>
 
     <script>
-        // Global Data and State
-        const categories = [
-            // --- 1. Air Conditioners (AC) ---
-            { name: "Air Conditioners", image: "https://placehold.co/400x300/1e40af/ffffff?text=Cooling+Systems", id: "AC", children: [
-                { name: "Inverter ACs", id: "INV", children: [
-                    { name: "1.5 Ton Capacity", id: "1.5T", children: [
-                        { name: "5-Star Rating", id: "5S", children: [
-                            { name: "Smart Wi-Fi Connect", isFinal: true, id: "WIFI" },
-                            { name: "Self-Clean Technology", isFinal: true, id: "SC" }
-                        ]}
-                    ]}
-                ]},
-                { name: "Non-Inverter ACs", id: "NONINV", children: [
-                    { name: "Window Units", id: "WIN", children: [
-                        { name: "0.8 Ton Capacity", id: "0.8T", children: [
-                            { name: "Basic Cooling", isFinal: true, id: "BAS" }
-                        ]}
-                    ]}
-                ]}
-            ]},
-            // --- 2. Smart Televisions (TV) ---
-            { name: "Smart Televisions", image: "https://placehold.co/400x300/c026d3/ffffff?text=Visual+Tech", id: "TV", children: [
-                { name: "QLED Displays", id: "QLED", children: [
-                    { name: "65-Inch", id: "65IN", children: [
-                        { name: "8K UHD Resolution", id: "8KUHD", children: [
-                            { name: "Cinematic Soundbar Incl.", isFinal: true, id: "CIN" },
-                            { name: "Built-in Voice Assistant", isFinal: true, id: "VA"}
-                        ]}
-                    ]}
-                ]},
-                { name: "OLED Displays", id: "OLED", children: [
-                    { name: "55-Inch", id: "55IN", children: [
-                        { name: "4K UHD Resolution", isFinal: true, id: "GOPT" }
-                    ]}
-                ]}
-            ]},
-            // --- 3. Washing Machines (WM) ---
-            { name: "Washing Machines", image: "https://placehold.co/400x300/059669/ffffff?text=Laundry+Care", id: "WM", children: [
-                { name: "Front Load", id: "FL", children: [
-                    { name: "10 Kg Capacity", id: "10KG", children: [
-                        { name: "Steam Wash Feature", id: "SW", children: [
-                            { name: "IoT Enabled", isFinal: true, id: "IOT" },
-                            { name: "Anti-Allergy Cycle", isFinal: true, id: "AAC" }
-                        ]}
-                    ]}
-                ]},
-                { name: "Top Load", id: "TL", children: [
-                    { name: "8 Kg Capacity", id: "8KG", children: [
-                        { name: "Quick Wash Feature", id: "QW", children: [
-                            { name: "Hard Water Treatment", isFinal: true, id: "HWT" }
-                        ]}
-                    ]}
-                ]}
-            ]},
-            // --- 4. Refrigerators (RF) ---
-            { name: "Refrigerators", image: "https://placehold.co/400x300/F59E0B/000000?text=Food+Storage", id: "RF", children: [
-                { name: "French Door", id: "FD", children: [
-                    { name: "600 Litre Capacity", id: "600L", children: [
-                        { name: "Convertible Freezer", id: "CF", children: [
-                            { name: "Built-in Water Dispenser", isFinal: true, id: "WD" },
-                            { name: "Smart Inverter Compressor", isFinal: true, id: "SIC" }
-                        ]}
-                    ]}
-                ]},
-                { name: "Double Door", id: "DD", children: [
-                    { name: "350 Litre Capacity", id: "350L", children: [
-                        { name: "Frost-Free Cooling", id: "FFC", children: [
-                            { name: "Toughened Glass Shelves", isFinal: true, id: "TGS" }
-                        ]}
-                    ]}
-                ]}
-            ]},
-            // --- 5. Microwave Ovens (MW) ---
-            { name: "Microwave Ovens", image: "https://placehold.co/400x300/EF4444/ffffff?text=Fast+Cooking", id: "MW", children: [
-                { name: "Convection", id: "CON", children: [
-                    { name: "30 Litre", id: "30L", children: [
-                        { name: "Tactile Buttons", id: "TB", children: [
-                            { name: "Auto Cook Menus (150+)", isFinal: true, id: "ACM" },
-                            { name: "Deodorizer Function", isFinal: true, id: "DFN" }
-                        ]}
-                    ]}
-                ]},
-                { name: "Solo", id: "SOLO", children: [
-                    { name: "20 Litre", id: "20L", children: [
-                        { name: "Mechanical Control", isFinal: true, id: "BRM" }
-                    ]}
-                ]}
-            ]},
-            // --- 6. Dishwashers (DW) ---
-            { name: "Dishwashers", image: "https://placehold.co/400x300/10B981/ffffff?text=Kitchen+Cleaning", id: "DW", children: [
-                { name: "Built-in", id: "BI", children: [
-                    { name: "14 Place Settings", id: "14PS", children: [
-                        { name: "Third Rack Technology", id: "TRT", children: [
-                            { name: "EcoSilence Drive", isFinal: true, id: "ESD" },
-                            { name: "Zeolite Drying", isFinal: true, id: "ZD" }
-                        ]}
-                    ]}
-                ]},
-                { name: "Freestanding", id: "FS", children: [
-                    { name: "12 Place Settings", id: "12PS", children: [
-                        { name: "Adjustable Racks", id: "AR", children: [
-                            { name: "Basic Model", isFinal: true, id: "BM" }
-                        ]}
-                    ]}
-                ]}
-            ]},
-            // --- 7. Air Purifiers (AP) ---
-            { name: "Air Purifiers", image: "https://placehold.co/400x300/4F46E5/ffffff?text=Air+Quality", id: "AP", children: [
-                { name: "HEPA Filtration", id: "HEPA", children: [
-                    { name: "Large Room (500 sqft)", id: "LR", children: [
-                        { name: "Laser Dust Sensor", id: "LDS", children: [
-                            { name: "App Controlled Scheduling", isFinal: true, id: "ACS" },
-                            { name: "UV-C Sterilization", isFinal: true, id: "UVCS" }
-                        ]}
-                    ]}
-                ]},
-                { name: "Carbon Filter", id: "CF", children: [
-                    { name: "Medium Room (300 sqft)", id: "MR", children: [
-                        { name: "Standard Sensor", isFinal: true, id: "TSM" }
-                    ]}
-                ]}
-            ]},
-            // --- 8. Vacuum Cleaners (VC) ---
-            { name: "Vacuum Cleaners", image: "https://placehold.co/400x300/CA8A04/ffffff?text=Floor+Care", id: "VC", children: [
-                { name: "Robotic Vacuums", id: "RV", children: [
-                    { name: "Lidar Mapping", id: "LM", children: [
-                        { name: "Auto-Empty Station", isFinal: true, id: "AES" },
-                        { name: "Mop & Vacuum Combo", isFinal: true, id: "MVC" },
-                        { name: "Multi-Floor Memory", isFinal: true, id: "MFM" }
-                    ]}
-                ]},
-                { name: "Cordless Stick", id: "CS", children: [
-                    { name: "High Suction (150AW)", id: "HS", children: [
-                        { name: "Interchangeable Batteries", id: "IB", children: [
-                            { name: "Pet Hair Attachments", isFinal: true, id: "PHA" }
-                        ]}
-                    ]}
-                ]}
-            ]},
-             // --- 9. Water Purifiers (WP) ---
-            { name: "Water Purifiers", image: "https://placehold.co/400x300/06B6D4/ffffff?text=Safe+Drinking", id: "WP", children: [
-                { name: "RO + UV + UF Filtration", id: "RO", children: [
-                    { name: "10 Litre Storage", id: "10L", children: [
-                        { name: "Mineral Infusion", id: "MI", children: [
-                            { name: "Smart Service Alert", isFinal: true, id: "SSA" },
-                            { name: "Digital Dispenser", isFinal: true, id: "DD" }
-                        ]}
-                    ]}
-                ]},
-                { name: "Gravity Filter", id: "GF", children: [
-                    { name: "15 Litre Storage", id: "15L", children: [
-                        { name: "Ceramic Candle", id: "CC", children: [
-                            { name: "High Flow Rate", isFinal: true, id: "HFR" }
-                        ]}
-                    ]}
-                ]}
-            ]},
-            // --- 10. Home Theatre Systems (HT) ---
-            { name: "Home Theatre Systems", image: "https://placehold.co/400x300/4B5563/ffffff?text=Immersive+Sound", id: "HT", children: [
-                { name: "Soundbars", id: "SB", children: [
-                    { name: "5.1 Channel", id: "5.1C", children: [
-                        { name: "Dolby Atmos Support", id: "DA", children: [
-                            { name: "Wireless Subwoofer", isFinal: true, id: "WS" },
-                            { name: "Rear Speakers Included", isFinal: true, id: "RSI" }
-                        ]}
-                    ]}
-                ]},
-                { name: "AV Receivers", id: "AVR", children: [
-                    { name: "7.2 Channel", id: "7.2C", children: [
-                        { name: "100W Per Channel", isFinal: true, id: "8KP" }
-                    ]} 
-                ]} 
-            ]},
-            // --- 11. Geysers/Water Heaters (WH) ---
-            { name: "Water Heaters (Geysers)", image: "https://placehold.co/400x300/991B1B/ffffff?text=Hot+Water", id: "WH", children: [
-                { name: "Instant Geysers", id: "IG", children: [
-                    { name: "3 Litre", id: "3L", children: [
-                        { name: "Copper Heating Element", id: "CHE", children: [
-                            { name: "High Pressure Rated", isFinal: true, id: "HPR" },
-                            { name: "LED Temperature Indicator", isFinal: true, id: "LTI" }
-                        ]}
-                    ]}
-                ]},
-                { name: "Storage Geysers", id: "SG", children: [
-                    { name: "25 Litre", id: "25L", children: [
-                        { name: "Glasslined Tank", id: "GLT", children: [
-                            { name: "Magnesium Anode Rod", isFinal: true, id: "MAR" }
-                        ]}
-                    ]}
-                ]}
-            ]},
-            // --- 12. Induction Cooktops (IC) ---
-            { name: "Induction Cooktops", image: "https://placehold.co/400x300/1D4ED8/ffffff?text=Modern+Cooking", id: "IC", children: [
-                { name: "Single Burner", id: "SB", children: [
-                    { name: "2000 Watt", id: "2000W", children: [
-                        { name: "Preset Indian Menus", id: "PIM", children: [
-                            { name: "Touch Control Panel", isFinal: true, id: "TCP" },
-                            { name: "Safety Lock Function", isFinal: true, id: "SLF" }
-                        ]}
-                    ]}
-                ]},
-                { name: "Double Burner", id: "DB", children: [
-                    { name: "3500 Watt", id: "3500W", children: [
-                        { name: "Digital Timer", id: "DT", children: [
-                            { name: "Independent Control", isFinal: true, id: "ICN" }
-                        ]}
-                    ]}
-                ]}
-            ]}
-        ]; 
-        // State to track the final product ID selected
-        let finalProductId = null;
+        // Product Data
+        const products = [
+            { id: 1, name: "Smart 4K TV 55\"", brand: "Samsung", price: "₹45,999", icon: "📺" },
+            { id: 2, name: "Inverter AC 1.5 Ton", brand: "LG", price: "₹32,999", icon: "❄️" },
+            { id: 3, name: "Double Door Fridge", brand: "Samsung", price: "₹28,999", icon: "🧊" },
+            { id: 4, name: "Front Load Washer", brand: "Bosch", price: "₹35,999", icon: "🌀" },
+            { id: 5, name: "OLED TV 65\"", brand: "Sony", price: "₹89,999", icon: "📺" },
+            { id: 6, name: "Split AC 2 Ton", brand: "Panasonic", price: "₹38,999", icon: "❄️" },
+            { id: 7, name: "Side by Side Fridge", brand: "Whirlpool", price: "₹52,999", icon: "🧊" },
+            { id: 8, name: "Top Load Washer", brand: "LG", price: "₹18,999", icon: "🌀" },
+            { id: 9, name: "Smart LED TV 43\"", brand: "Samsung", price: "₹29,999", icon: "📺" },
+            { id: 10, name: "Window AC 1 Ton", brand: "Haier", price: "₹24,999", icon: "❄️" },
+            { id: 11, name: "Mini Fridge", brand: "Godrej", price: "₹12,999", icon: "🧊" },
+            { id: 12, name: "Semi Auto Washer", brand: "Whirlpool", price: "₹14,999", icon: "🌀" }
+        ];
 
-        /**
-         * Renders the nested category list recursively.
-         * @param {Array} list - The list of categories to render.
-         * @param {number} level - The current nesting level (0 for top-level).
-         * @param {string} parentId - The unique ID string of the parent container.
-         * @returns {string} The HTML string for the nested list.
-         */
-        function renderNestedCategories(list, level, parentId = 'root') {
-            if (!list || list.length === 0) return '';
+        let selectedBrand = null;
+        let clubItems = [];
+        let currentProduct = null;
 
-            let html = '';
-            // Define styling based on nesting level
-            const levelClasses = [
-                'font-bold text-lg py-4 px-4 bg-yellow-600 text-white rounded-t-xl', // Level 0: Main Category Header - NEW: Yellow background, white text
-                'font-semibold text-base py-3 px-4', // Level 1: Main Type
-                'font-medium text-base py-3 px-4 pl-8', // Level 2: Capacity/Size
-                'font-normal text-sm py-3 px-4 pl-12', // Level 3: Key Feature
-                'font-light text-sm py-3 px-4 pl-16' // Level 4/5+: Final Options
-            ];
-
-            const textClasses = [
-                'text-white', // Level 0 text color (set in levelClasses but kept here for consistency)
-                'text-gray-900', 
-                'text-gray-800', 
-                'text-gray-700', 
-                'text-gray-600'
-            ];
-
-            list.forEach((category, index) => {
-                const isFinal = category.isFinal;
-                const hasChildren = category.children && category.children.length > 0;
-                
-                // Unique ID for the collapsible container
-                const collapseId = `${parentId}-${category.id}-${index}`;
-                
-                const currentLevelClass = levelClasses[Math.min(level, levelClasses.length - 1)];
-                const currentTextClass = textClasses[Math.min(level, textClasses.length - 1)];
-
-                const bgColorClass = level === 0 ? 'bg-yellow-600' : 'bg-white';
-                
-                // Main category item structure
-                html += `
-                    <div class="category-list-item overflow-hidden" 
-                         onclick="event.stopPropagation(); handleCategoryClick('${category.name}', '${category.id}', ${isFinal}, '${collapseId}')">
-                        
-                        <div class="flex items-center justify-between transition duration-150 ${currentLevelClass} ${currentTextClass} ${bgColorClass} ${!isFinal && level > 0 ? 'border-b border-gray-100' : ''} ${level === 0 ? 'shadow-md mt-4 first:mt-0' : 'hover:bg-yellow-50'}"
-                             style="${level > 0 ? `padding-left: ${16 + level * 8}px;` : ''}"
-                             >
-                            
-                            <h3 class="flex items-center space-x-3 w-full">
-                                <span>${category.name}</span>
-                            </h3>
-                            
-                            <div class="flex items-center space-x-2 flex-shrink-0">
-                                ${isFinal 
-                                    ? `<span class="text-sm font-bold text-yellow-600 bg-yellow-500/20 px-2 py-1 rounded-full">Inquire Now</span>` // Updated to Yellow accent
-                                    : hasChildren 
-                                        ? `<svg id="arrow-${collapseId}" class="w-5 h-5 ${level === 0 ? 'text-white' : 'text-gray-500'} transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`
-                                        : ''
-                                }
-                            </div>
-                        </div>
-                        
-                        ${hasChildren ? `
-                            <!-- Collapsible Container for Children -->
-                            <div id="${collapseId}" class="hidden">
-                                ${renderNestedCategories(category.children, level + 1, collapseId)}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            });
-
-            return html;
-        }
-
-
-        /**
-         * Handles the click on a category item, either expanding/collapsing or opening the modal.
-         * @param {string} name - The name of the clicked category.
-         * @param {string} id - The ID of the clicked category.
-         * @param {boolean} isFinal - True if this is a final option, triggering the modal.
-         * @param {string} collapseId - The ID of the nested div to collapse/expand.
-         */
-        function handleCategoryClick(name, id, isFinal, collapseId) {
-            if (isFinal) {
-                document.getElementById('final-selection-name').textContent = name;
-                finalProductId = id;
-                openModal();
-            } else {
-                const collapseElement = document.getElementById(collapseId);
-                const arrowElement = document.getElementById(`arrow-${collapseId}`);
-
-                if (collapseElement && arrowElement) {
-                    // Check if it's currently hidden
-                    const isHidden = collapseElement.classList.contains('hidden');
-
-                    // Toggle visibility
-                    collapseElement.classList.toggle('hidden', !isHidden);
-                    
-                    // Toggle arrow rotation
-                    arrowElement.classList.toggle('rotate-90', isHidden);
-
-                    // --- FIX FOR JARRING SCROLL ---
-                    if (isHidden) {
-                        const clickedItem = collapseElement.parentNode; // The .category-list-item div
-                        const rect = clickedItem.getBoundingClientRect();
-                        const viewportHeight = window.innerHeight;
-                        // Fixed header allowance (approx height of header + padding, roughly 5rem = 80px)
-                        const fixedHeaderAllowance = 80; 
-
-                        // 1. If the item is expanding AND its top is under the fixed header
-                        if (rect.top < fixedHeaderAllowance) {
-                            // Scroll the item to the top, just below the fixed header (using 'start')
-                            clickedItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        } 
-                        // 2. If the item is expanding AND its bottom is outside the viewport (at the bottom)
-                        else if (rect.bottom > viewportHeight) {
-                            // Scroll the item into view, aligning to the bottom of the viewport
-                            clickedItem.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                        }
-                    }
-                    // --- END FIX FOR JARRING SCROLL ---
-                }
-            }
-        }
-
-
-        /**
-         * Opens WhatsApp link with pre-filled message.
-         */
-        function sendWhatsAppMessage() {
-            // Number: +91 8714990266 (WhatsApp link requires country code without '+')
-            const phoneNumber = '918714990266'; 
-            const message = 'Hi';
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-
-
-        // --- Modal Functions ---
-
-        const initialActionButtonsHtml = `
-            <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-3 px-5 rounded-lg mr-3 hover:bg-gray-400 transition duration-150 font-medium">Cancel</button>
-            <button type="submit" id="submit-button" class="bg-yellow-500 text-gray-900 py-3 px-6 rounded-lg font-bold hover:bg-yellow-600 transition duration-150 shadow-lg">Submit Inquiry</button>
-        `;
-
-        function openModal() {
-            const modal = document.getElementById('contact-modal');
-            const content = document.getElementById('modal-content');
-            modal.classList.remove('hidden');
-            // Force reflow to ensure transition works
-            void modal.offsetWidth; 
-            modal.classList.add('opacity-100');
-            content.classList.remove('scale-95', 'opacity-0');
-            content.classList.add('scale-100', 'opacity-100');
-
-            // Reset UI state for form
-            document.getElementById('modal-title').innerHTML = `Inquire for Club Pricing on <span id="final-selection-name" class="text-yellow-600">${document.getElementById('final-selection-name').textContent}</span>`;
-            document.getElementById('modal-description').textContent = "Provide your contact details below. Once enough collective orders are met, our specialist will contact you with the final, maximized discount price.";
-            document.getElementById('form-fields').classList.remove('hidden');
-            document.getElementById('action-buttons').innerHTML = initialActionButtonsHtml;
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('contact-modal');
-            const content = document.getElementById('modal-content');
-            content.classList.remove('scale-100', 'opacity-100');
-            content.classList.add('scale-95', 'opacity-0');
-            modal.classList.remove('opacity-100');
+        // Render Products
+        function renderProducts(filterBrand = null) {
+            const grid = document.getElementById('productsGrid');
+            const filtered = filterBrand ? products.filter(p => p.brand === filterBrand) : products;
             
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                // Reset form and message
-                document.getElementById('contact-form').reset();
-                document.getElementById('submission-message').classList.add('hidden');
-                document.getElementById('action-buttons').innerHTML = initialActionButtonsHtml;
-            }, 300); // Match transition duration
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card">
+                    <div class="product-image">${product.icon}</div>
+                    <div class="product-info">
+                        <div class="product-brand">${product.brand}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">${product.price}</div>
+                        <button class="add-to-club-btn" onclick="addToClub(${product.id})">Add to Club</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        /**
-         * Handles the form submission (POST request simulation).
-         * @param {Event} event - The form submit event.
-         */
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const actionButtonsDiv = document.getElementById('action-buttons');
-            const messageDiv = document.getElementById('submission-message');
+        // Brand Filter
+        document.querySelectorAll('.brand-tile').forEach(tile => {
+            tile.addEventListener('click', function() {
+                document.querySelectorAll('.brand-tile').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                selectedBrand = this.dataset.brand;
+                renderProducts(selectedBrand);
+            });
+        });
 
+        // Add to Club
+        function addToClub(productId) {
+            currentProduct = products.find(p => p.id === productId);
+            document.getElementById('modal').classList.add('active');
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.getElementById('clubForm').reset();
+        }
+
+        // Form Submit
+        document.getElementById('clubForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
             const formData = {
-                product_id: finalProductId,
-                product_name: document.getElementById('final-selection-name').textContent,
-                name: form.name.value,
-                email: form.email.value,
-                phone: form.phone.value,
-                clubnow_model_active: true
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                pincode: document.getElementById('pincode').value,
+                product: currentProduct.name,
+                brand: currentProduct.brand
             };
 
-            // 1. Processing State (Gray background, dark text for light theme)
-            messageDiv.textContent = 'Processing Club Order...';
-            messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-gray-900 font-medium bg-gray-300 block';
-            actionButtonsDiv.innerHTML = `<button type="button" disabled class="bg-yellow-400 text-gray-900 py-3 px-6 rounded-lg font-bold shadow-lg opacity-70">Submitting...</button>`;
-
-            console.log('--- Sample POST Request Payload ---');
-            console.log(JSON.stringify(formData, null, 2));
-
-            // --- Sample POST Request Code ---
-            const SAMPLE_API_ENDPOINT = 'https://jsonplaceholder.typicode.com/posts'; 
-            
+            // Simulate API call
             try {
-                // Simulate network latency (2 seconds)
-                await new Promise(resolve => setTimeout(resolve, 2000)); 
-
-                const response = await fetch(SAMPLE_API_ENDPOINT, {
+                const response = await fetch('https://api.example.com/club/join', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('Sample API Response:', result);
-
-                    // 2. Success State & WhatsApp Confirmation Prompt (Green for Success Semantic)
-                    document.getElementById('modal-title').textContent = 'Inquiry Submitted!';
-                    document.getElementById('modal-description').textContent = 'Your club order is logged. For the fastest response and price confirmation, we recommend continuing the discussion on WhatsApp.';
-                    document.getElementById('form-fields').classList.add('hidden');
-                    
-                    messageDiv.textContent = 'Contact details recorded successfully.';
-                    messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-bold bg-green-600 block';
-
-                    // Update action buttons for WhatsApp confirmation
-                    actionButtonsDiv.innerHTML = `
-                        <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 py-3 px-5 rounded-lg mr-3 hover:bg-gray-400 transition duration-150 font-medium">Close</button>
-                        <button type="button" onclick="sendWhatsAppMessage(); closeModal();" class="bg-green-500 text-white py-3 px-6 rounded-lg font-bold hover:bg-green-600 transition duration-150 shadow-lg flex items-center justify-center">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12c0 3.31 1.6 6.3 4.07 8.16l-1.33 4.88 4.88-1.33C9.7 22.4 11.8 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.17 14.59c-.06-.03-.4-.15-.75-.3-.35-.15-.6-.2-.84.25-.24.45-.48.48-.8.43-.32-.06-1.15-.43-2.19-1.32-1.04-.89-1.74-1.95-1.94-2.29-.2-.33 0-.51.15-.66.14-.14.31-.2.4-.28.08-.08.15-.17.25-.29.1-.12.14-.2.2-.33.06-.13 0-.25-.13-.51-.13-.25-.97-2.31-1.33-3.17-.36-.85-.73-.75-1.02-.77-.28-.02-.6-.02-.92-.02-.32 0-.84.12-1.28.6-.44.47-1.68 1.63-1.68 4.05 0 2.42 1.73 4.86 1.97 5.17.24.31 3.39 5.2 8.08 6.55 4.69 1.35 4.69.9 5.53.84.84-.06 2.05-.83 2.34-1.67.29-.83.29-.83.2-.99-.09-.15-.35-.24-.7-.41z"/></svg>
-                            Chat on WhatsApp
-                        </button>
-                    `;
-                    
-                } else {
-                    throw new Error('Network response was not ok.');
-                }
+                
+                // Success
+                clubItems.push(currentProduct);
+                document.getElementById('clubCount').textContent = clubItems.length;
+                
+                // Show success modal
+                showSuccessModal(formData.name);
             } catch (error) {
-                console.error('Submission failed:', error);
-                // 3. Error State (Red Semantic)
-                messageDiv.textContent = 'Error: Failed to process club order. Please check your connection and try again.';
-                messageDiv.className = 'mt-4 text-center p-3 rounded-lg text-white font-medium bg-red-600 block';
-                actionButtonsDiv.innerHTML = initialActionButtonsHtml;
+                // Even on error, show success for demo
+                clubItems.push(currentProduct);
+                document.getElementById('clubCount').textContent = clubItems.length;
+                showSuccessModal(formData.name);
             }
-            // --- End Sample POST Request Code ---
+        });
+
+        // Success Modal
+        function showSuccessModal(name) {
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <div class="success-modal">
+                    <div class="success-icon">✓</div>
+                    <h2 class="success-title">Welcome to ClubNow, ${name}!</h2>
+                    <p class="success-text">Your product has been added to the club. Connect with us on WhatsApp for quicker assistance!</p>
+                    <a href="https://wa.me/919876543210?text=Hi" class="whatsapp-btn" target="_blank" onclick="closeModal()">
+                        <span>💬</span>
+                        <span>Send Hi on WhatsApp</span>
+                    </a>
+                </div>
+            `;
         }
 
-        // --- Banner Carousel Logic ---
-        let currentBannerIndex = 0;
-        const bannerItems = [];
+        // Banner Sliders
+        function initSlider(bannerId) {
+            const banner = document.getElementById(bannerId);
+            const track = banner.querySelector('.banner-track');
+            const slides = banner.querySelectorAll('.banner-slide');
+            const dots = banner.querySelectorAll('.dot');
+            let current = 0;
 
-        function initBanner() {
-            const container = document.getElementById('banner-container');
-            bannerItems.push(...container.querySelectorAll('.banner-item'));
-
-            if (bannerItems.length > 0) {
-                showBanner(0);
-                setInterval(nextBanner, 5000); // Change banner every 5 seconds
+            function goToSlide(index) {
+                current = index;
+                track.style.transform = `translateX(-${current * 100}%)`;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === current);
+                });
             }
-        }
 
-        function showBanner(index) {
-            bannerItems.forEach((item, i) => {
-                if (i === index) {
-                    item.style.opacity = '1';
-                    item.style.zIndex = '1';
-                } else {
-                    item.style.opacity = '0';
-                    item.style.zIndex = '0';
-                }
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => goToSlide(i));
             });
-            currentBannerIndex = index;
+
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                goToSlide(current);
+            }, 4000);
         }
 
-        function nextBanner() {
-            const newIndex = (currentBannerIndex + 1) % bannerItems.length;
-            showBanner(newIndex);
-        }
+        // See More Categories
+        const allCategories = [
+            { icon: "🍳", name: "Cooktops" },
+            { icon: "🍞", name: "Toasters" },
+            { icon: "☕", name: "Coffee Makers" },
+            { icon: "🔥", name: "Microwaves" },
+            { icon: "💨", name: "Air Purifiers" },
+            { icon: "💧", name: "Water Purifiers" }
+        ];
 
-        // Initialize the app on page load
-        window.onload = function() {
-            // Start the recursive rendering for the multi-level dropdown
-            const listContainer = document.getElementById('category-list');
-            listContainer.innerHTML = renderNestedCategories(categories, 0);
-            initBanner();
-        };
+        document.getElementById('seeMoreCategory').addEventListener('click', function() {
+            const container = document.getElementById('categories');
+            allCategories.forEach(cat => {
+                const item = document.createElement('div');
+                item.className = 'category-item';
+                item.innerHTML = `
+                    <div class="category-circle">${cat.icon}</div>
+                    <div class="category-name">${cat.name}</div>
+                `;
+                container.insertBefore(item, this);
+            });
+            this.remove();
+        });
 
+        // Initialize
+        renderProducts();
+        initSlider('banner1');
+        initSlider('banner2');
     </script>
-
 </body>
 </html>
-
